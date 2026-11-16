@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
+<title>NEXORA Browser</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ background:#080d18;color:#fff;
+ font-family:Arial,sans-serif;
+ min-height:100vh;
+}
+header{
+ text-align:center;padding:25px 15px 20px;
+ background:linear-gradient(135deg,#101b39,#172d55);
+}
+.logo{
+ font-size:34px;font-weight:900;letter-spacing:4px;
+ background:linear-gradient(90deg,#40e5ff,#a78bfa);
+ -webkit-background-clip:text;color:transparent;
+}
+header p{font-size:11px;color:#a8bddb;margin-top:7px;letter-spacing:2px}
+.container{max-width:850px;margin:auto;padding:18px 14px}
+.search{
+ display:flex;align-items:center;gap:8px;
+ background:#17243a;border:1px solid #354b69;
+ border-radius:16px;padding:7px;
+}
+.search input{
+ flex:1;min-width:0;background:transparent;
+ border:0;outline:0;color:white;
+ padding:13px 8px;font-size:15px;
+}
+.search button{
+ background:#42d9f5;border:0;color:#07131b;
+ padding:13px 17px;border-radius:11px;
+ font-weight:bold;
+}
+.controls{display:flex;gap:8px;margin-top:12px}
+.controls button{
+ flex:1;background:#17243a;color:#d5e9ff;
+ border:1px solid #304765;border-radius:11px;
+ padding:12px 4px;font-size:18px;
+}
+.status{font-size:12px;color:#65dafa;margin:14px 4px}
+h3{font-size:15px;margin:24px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.site{
+ text-align:center;padding:18px 5px;
+ background:#142137;border:1px solid #293e5b;
+ border-radius:15px;cursor:pointer;
+}
+.site:active{transform:scale(.96)}
+.site span{font-size:27px}
+.site p{font-size:12px;color:#d6e5f7;margin-top:9px}
+.panel{
+ margin-top:22px;background:#121f33;
+ border:1px solid #2a405e;border-radius:15px;padding:16px;
+}
+.panel p{font-size:13px;color:#aabbd2;line-height:1.7}
+.panel button{
+ background:#1d3b5a;color:#67dcff;border:0;
+ border-radius:9px;padding:10px;margin-top:12px;
+}
+.item{
+ font-size:12px;color:#6bdcff;
+ display:block;margin-top:12px;
+ word-break:break-all;
+}
+footer{text-align:center;color:#70829b;font-size:12px;padding:28px 10px}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">NEXORA</div>
+ <p>YOUR WORLD • YOUR BROWSER</p>
+</header>
+
+<main class="container">
+
+ <div class="search">
+  <span>🌐</span>
+  <input id="address" placeholder="Search or enter website..."
+  onkeydown="if(event.key==='Enter')searchWeb()">
+  <button onclick="searchWeb()">GO</button>
+ </div>
+
+ <div class="controls">
+  <button onclick="goBack()">←</button>
+  <button onclick="goForward()">→</button>
+  <button onclick="refreshPage()">↻</button>
+  <button onclick="goHome()">⌂</button>
+ </div>
+
+ <div class="status" id="status">
+  Welcome to NEXORA Browser
+ </div>
+
+ <h3>⚡ QUICK ACCESS</h3>
+
+ <div class="grid">
+  <div class="site" onclick="openWebsite('https://duckduckgo.com')">
+   <span>🦆</span><p>DuckDuckGo</p>
+  </div>
+  <div class="site" onclick="openWebsite('https://www.wikipedia.org')">
+   <span>📚</span><p>Wikipedia</p>
+  </div>
+  <div class="site" onclick="openWebsite('https://github.com')">
+   <span>💻</span><p>GitHub</p>
+  </div>
+  <div class="site" onclick="openWebsite('https://www.mozilla.org')">
+   <span>🦊</span><p>Mozilla</p>
+  </div>
+  <div class="site" onclick="openWebsite('https://www.bing.com')">
+   <span>🔎</span><p>Bing</p>
+  </div>
+  <div class="site" onclick="openWebsite('https://www.openstreetmap.org')">
+   <span>🗺️</span><p>Maps</p>
+  </div>
+ </div>
+
+ <div class="panel">
+  <h3>🔖 BOOKMARKS</h3>
+  <p>अपनी पसंदीदा वेबसाइट सेव करें।</p>
+  <button onclick="saveBookmark()">+ Save Website</button>
+  <div id="bookmarks"></div>
+ </div>
+
+ <div class="panel">
+  <h3>🕘 HISTORY</h3>
+  <div id="historyList"></div>
+  <button onclick="clearHistory()">Clear History</button>
+ </div>
+
+ <div class="panel">
+  <h3>✨ ABOUT NEXORA</h3>
+  <p>आपका अपना वेब ब्राउज़र। डिफॉल्ट सर्च DuckDuckGo है। Google Search का उपयोग नहीं किया गया है।</p>
+ </div>
+
+</main>
+
+<footer>© 2026 NEXORA BROWSER</footer>
+
+<script>
+let currentURL="";
+let backStack=[];
+let forwardStack=[];
+
+function searchWeb(){
+ let q=document.getElementById("address").value.trim();
+ if(!q)return;
+
+ let url;
+ if(/^https?:\/\//i.test(q)){
+  url=q;
+ }else if(q.includes(".")&&!q.includes(" ")){
+  url="https://"+q;
+ }else{
+  url="https://duckduckgo.com/?q="+encodeURIComponent(q);
+ }
+ openWebsite(url);
+}
+
+function openWebsite(url){
+ if(currentURL && currentURL!==url){
+  backStack.push(currentURL);
+  forwardStack=[];
+ }
+ currentURL=url;
+ document.getElementById("address").value=url;
+ document.getElementById("status").textContent="Opening: "+url;
+
+ let h=JSON.parse(localStorage.getItem("nexHistory")||"[]");
+ h.unshift(url);
+ h=[...new Set(h)].slice(0,20);
+ localStorage.setItem("nexHistory",JSON.stringify(h));
+ renderHistory();
+
+ // यह वेबसाइट नए टैब में खोलता है।
+ window.open(url,"_blank");
+}
+
+function goBack(){
+ if(backStack.length){
+  forwardStack.push(currentURL);
+  currentURL=backStack.pop();
+  window.open(currentURL,"_blank");
+ }
+}
+function goForward(){
+ if(forwardStack.length){
+  backStack.push(currentURL);
+  currentURL=forwardStack.pop();
+  window.open(currentURL,"_blank");
+ }
+}
+function refreshPage(){
+ if(currentURL)window.open(currentURL,"_blank");
+}
+function goHome(){
+ currentURL="";
+ document.getElementById("address").value="";
+ document.getElementById("status").textContent="Welcome to NEXORA Browser";
+}
+
+function saveBookmark(){
+ if(!currentURL){alert("पहले वेबसाइट खोलें");return}
+ let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
+ if(!b.includes(currentURL))b.push(currentURL);
+ localStorage.setItem("nexBookmarks",JSON.stringify(b));
+ renderBookmarks();
+}
+function renderBookmarks(){
+ let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
+ document.getElementById("bookmarks").innerHTML=
+ b.map((url,i)=>`<div class="item">
+ <a href="${url}" target="_blank" style="color:#6bdcff">${url}</a>
+ <button onclick="deleteBookmark(${i})">✕</button>
+ </div>`).join("")||"<p>कोई Bookmark नहीं है।</p>";
+}
+function deleteBookmark(i){
+ let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
+ b.splice(i,1);
+ localStorage.setItem("nexBookmarks",JSON.stringify(b));
+ renderBookmarks();
+}
+function renderHistory(){
+ let h=JSON.parse(localStorage.getItem("nexHistory")||"[]");
+ document.getElementById("historyList").innerHTML=
+ h.map(url=>`<a class="item" href="${url}" target="_blank">${url}</a>`).join("")
+ ||"<p>अभी कोई History नहीं है।</p>";
+}
+function clearHistory(){
+ localStorage.removeItem("nexHistory");
+ renderHistory();
+}
+
+renderBookmarks();
+renderHistory();
+</script>
+
+</body>
+</html>
