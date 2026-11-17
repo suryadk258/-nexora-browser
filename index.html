@@ -3,31 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#d946ef">
+<meta name="theme-color" content="#ffffff">
 <title>JEFROX Browser</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{
- background: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #f43f5e 100%);
- background-attachment: fixed;
- color: #fff;
+body, html{
+ width: 100%;
+ height: 100%;
+ overflow: hidden;
+ background: #0f172a;
  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
- min-height: 100vh;
- padding-bottom: 75px;
 }
+
+/* होम स्क्रीन व्यू */
+#homeView {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: calc(100% - 65px);
+ background: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #f43f5e 100%);
+ overflow-y: auto;
+ display: block;
+ padding-bottom: 20px;
+}
+
+/* वेब ब्राउज़र व्यू (जब कोई साइट खुलेगी तो इसी के अंदर चलेगी और नीचे बटन हमेशा दिखेंगे) */
+#browserView {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: calc(100% - 65px);
+ border: none;
+ display: none;
+ background: #ffffff;
+}
+
 header{
  text-align: center;
- padding: 22px 15px;
+ padding: 18px 15px;
  background: rgba(255, 255, 255, 0.15);
  backdrop-filter: blur(15px);
  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
- box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* JEFROX का 3D अलग-अलग रंगों वाला लोगो */
+/* JEFROX का 3D स्टाइलिश लोगो */
 .logo {
- font-size: 42px;
+ font-size: 38px;
  font-weight: 900;
  letter-spacing: 5px;
  display: inline-block;
@@ -40,7 +64,7 @@ header{
 .l-o { color: #ffffff; text-shadow: 0 4px 0 #6d28d9, 0 0 20px #8b5cf6, 0 0 30px #c084fc; }
 .l-x { color: #ff5e00; text-shadow: 0 4px 0 #c2410c, 0 8px 20px rgba(255,94,0,0.8); }
 
-.container{max-width:850px;margin:auto;padding:18px 14px}
+.container{max-width:850px;margin:auto;padding:16px 14px}
 .search{
  display:flex;align-items:center;gap:8px;
  background:#ffffff;border:none;
@@ -87,7 +111,7 @@ header{
 /* पॉप-अप मॉडल्स */
 .modal{
  display:none;position:fixed;top:0;left:0;width:100%;height:100%;
- background:rgba(15, 23, 42, 0.75);z-index:2000;
+ background:rgba(15, 23, 42, 0.75);z-index:999999;
  justify-content:flex-end;flex-direction:column;
 }
 .modal-content{
@@ -119,60 +143,69 @@ header{
 }
 .item button{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:6px;cursor:pointer;}
 
-/* सबसे नीचे फिक्स एक्शन बार */
+/* सबसे नीचे फिक्स एक्शन बार (सफेद बैकग्राउंड और हमेशा फिक्स) */
 .bottom-bar{
- position:fixed;
- bottom:0;left:0;width:100%;
- background:#ffffff;
- border-top:1px solid #e2e8f0;
- display:flex;
+ position:fixed !important;
+ bottom:0 !important;
+ left:0 !important;
+ width:100% !important;
+ height: 65px;
+ background: #ffffff !important;
+ border-top: 1px solid #cbd5e1;
+ display:flex !important;
  justify-content:space-around;
  align-items:center;
- padding:7px 2px;
- z-index:1000;
- box-shadow:0 -2px 15px rgba(0,0,0,0.12);
+ padding:4px;
+ z-index:999998 !important;
+ box-shadow: 0 -2px 15px rgba(0,0,0,0.2);
 }
 .bottom-item{
- background:transparent;border:0;color:#475569;
- font-size:10px;font-weight:700;text-align:center;cursor:pointer;
- display:flex;flex-direction:column;align-items:center;gap:2px;
+ background:transparent;border:0;color:#334155 !important;
+ font-size:24px;font-weight:bold;text-align:center;cursor:pointer;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
  flex:1;
+ height:100%;
 }
-.bottom-item span{font-size:18px}
-.active-mode{color:#db2777 !important;}
+.bottom-item:active{color:#db2777 !important;}
 </style>
 </head>
 
 <body>
 
-<header>
- <div class="logo">
-  <span class="l-j">J</span><span class="l-e">E</span><span class="l-f">F</span><span class="l-r">R</span><span class="l-o">O</span><span class="l-x">X</span>
- </div>
-</header>
+<!-- 1. होम स्क्रीन व्यू -->
+<div id="homeView">
+ <header>
+  <div class="logo">
+   <span class="l-j">J</span><span class="l-e">E</span><span class="l-f">F</span><span class="l-r">R</span><span class="l-o">O</span><span class="l-x">X</span>
+  </div>
+ </header>
 
-<main class="container">
- <div class="search">
-  <span>🔍</span>
-  <input id="address" placeholder="Search or enter website..." onkeydown="if(event.key==='Enter')searchWeb()">
-  <button onclick="searchWeb()">GO</button>
- </div>
+ <main class="container">
+  <div class="search">
+   <span>🔍</span>
+   <input id="address" placeholder="Search or enter website..." onkeydown="if(event.key==='Enter')searchWeb()">
+   <button onclick="searchWeb()">GO</button>
+  </div>
 
- <div class="ad-container">
-  <script type="text/javascript">
-    document.write('<scr' + 'ipt type="text/javascript" src="https://statict.startappservice.com/js/smaandro.js?appId=210611342"></scr' + 'ipt>');
-  </script>
- </div>
+  <div class="ad-container">
+   <script type="text/javascript">
+     document.write('<scr' + 'ipt type="text/javascript" src="https://statict.startappservice.com/js/smaandro.js?appId=210611342"></scr' + 'ipt>');
+   </script>
+  </div>
 
- <div class="grid">
-  <div class="site" onclick="openWebsite('https://duckduckgo.com')"><span>🦆</span><p>DuckDuckGo</p></div>
-  <div class="site" onclick="openWebsite('https://www.wikipedia.org')"><span>📚</span><p>Wikipedia</p></div>
-  <div class="site" onclick="openWebsite('https://www.youtube.com')"><span>▶️</span><p>YouTube</p></div>
-  <div class="site" onclick="openWebsite('https://www.mozilla.org')"><span>🦊</span><p>Mozilla</p></div>
-  <div class="site" onclick="openWebsite('https://www.bing.com')"><span>🔎</span><p>Bing</p></div>
-  <div class="site" onclick="openWebsite('https://www.openstreetmap.org')"><span>🗺️</span><p>Maps</p></div>
- </div>
-</main>
+  <div class="grid">
+   <div class="site" onclick="openWebsite('https://duckduckgo.com')"><span>🦆</span><p>DuckDuckGo</p></div>
+   <div class="site" onclick="openWebsite('https://www.wikipedia.org')"><span>📚</span><p>Wikipedia</p></div>
+   <div class="site" onclick="openWebsite('https://www.youtube.com')"><span>▶️</span><p>YouTube</p></div>
+   <div class="site" onclick="openWebsite('https://www.mozilla.org')"><span>🦊</span><p>Mozilla</p></div>
+   <div class="site" onclick="openWebsite('https://www.bing.com')"><span>🔎</span><p>Bing</p></div>
+   <div class="site" onclick="openWebsite('https://www.openstreetmap.org')"><span>🗺️</span><p>Maps</p></div>
+  </div>
+ </main>
+</div>
+
+<!-- 2. वेब ब्राउज़र फ्रेम (iframe) -->
+<iframe id="browserView" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
 
 <!-- बुकमार्क पॉप-अप -->
 <div class="modal" id="bookmarkModal">
@@ -203,27 +236,35 @@ header{
  <div class="modal-content">
   <div id="settingsMainView">
    <div class="modal-header">
-    <h2>Settings</h2>
+    <h2>Settings & Menu</h2>
     <button class="close-btn" onclick="closeAllModals()">✕</button>
    </div>
+   <div class="setting-row" onclick="toggleDesktopMode()">
+    <div><h4 id="desktopText">Desktop Mode: OFF</h4><p>Switch between Mobile & Desktop view</p></div>
+    <span id="desktopStatus">💻</span>
+   </div>
    <div class="setting-row" onclick="openSubPage('generalPage')">
-    <div><h4>General & Language</h4><p>Language, Homepage, Search settings</p></div>
+    <div><h4>Language & Region (भाषा)</h4><p>English & All Indian Languages</p></div>
     <span>›</span>
    </div>
    <div class="setting-row" onclick="openSubPage('privacyPage')">
-    <div><h4>Privacy Policy</h4><p>Do not track, Data protection & Policy</p></div>
+    <div><h4>Privacy Policy</h4><p>Data protection & Policy</p></div>
     <span>›</span>
    </div>
-   <div class="setting-row" onclick="openExternalLink('https://t.me/kingsearning99')">
-    <div><h4>Telegram Official</h4><p>Join @kingsearning99</p></div>
+   <div class="setting-row" onclick="openExternalLink('https://t.me/Jafarearningtrick')">
+    <div><h4>Telegram Official</h4><p>Join @Jafarearningtrick</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="openHistoryModal()">
+    <div><h4>Browsing History</h4><p>View saved history</p></div>
     <span>›</span>
    </div>
   </div>
 
-  <!-- 1. General & Language पेज -->
+  <!-- Language & Region -->
   <div id="generalPage" class="sub-page">
    <div class="modal-header">
-    <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> General</h2>
+    <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Language & Region</h2>
     <button class="close-btn" onclick="closeAllModals()">✕</button>
    </div>
    <div class="setting-row">
@@ -234,9 +275,24 @@ header{
      <option value="bing">Bing</option>
     </select>
    </div>
+   <div class="setting-row">
+    <div><h4>Select Language (भाषा चुनें)</h4><p>English & Indian Regional Languages</p></div>
+    <select id="appLanguage" onchange="changeLanguage(this.value)" style="padding:6px;border-radius:6px;border:1px solid #cbd5e1;">
+     <option value="en">English</option>
+     <option value="hi">हिन्दी (Hindi)</option>
+     <option value="bn">বাংলা (Bengali)</option>
+     <option value="mr">मराठी (Marathi)</option>
+     <option value="gu">ગુજરાતી (Gujarati)</option>
+     <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+     <option value="ta">தமிழ் (Tamil)</option>
+     <option value="te">తెలుగు (Telugu)</option>
+     <option value="kn">ಕನ್ನಡ (Kannada)</option>
+     <option value="ml">മലയാളം (Malayalam)</option>
+    </select>
+   </div>
   </div>
 
-  <!-- 2. Privacy Policy पेज -->
+  <!-- Privacy Policy -->
   <div id="privacyPage" class="sub-page">
    <div class="modal-header">
     <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Privacy Policy</h2>
@@ -251,67 +307,21 @@ header{
  </div>
 </div>
 
-<!-- सबसे नीचे फिक्स एक्शन बार -->
+<!-- सबसे नीचे फिक्स नेविगेशन बार (सफेद पट्टी और हमेशा दिखने वाले बटन) -->
 <div class="bottom-bar">
- <button class="bottom-item" onclick="goHome()"><span>⌂</span>Home</button>
- <button class="bottom-item" onclick="openBookmarkModal()"><span>⭐</span>Bookmark</button>
- <button class="bottom-item" onclick="openHistoryModal()"><span>📜</span>History</button>
- <button class="bottom-item" id="desktopBtn" onclick="toggleDesktopMode()"><span>💻</span>Desktop</button>
- <button class="bottom-item" onclick="openSettingsModal()"><span>⚙️</span>Settings</button>
+ <button class="bottom-item" onclick="goBackBrowser()">‹</button>
+ <button class="bottom-item" onclick="goForwardBrowser()">›</button>
+ <button class="bottom-item" onclick="goHome()">⌂</button>
+ <button class="bottom-item" onclick="openBookmarkModal()">⭐</button>
+ <button class="bottom-item" onclick="openSettingsModal()">☰</button>
 </div>
 
 <script>
 let currentURL="";
 let currentEngine="duckduckgo";
 let isDesktop=false;
-
-// यह मैजिक कोड बैक बटन या स्वाइप को हमेशा होम या मॉडल्स के अंदर ही रोके रखेगा, बाहर नहीं जाने देगा
-history.pushState({page: "lock"}, "", "");
-window.addEventListener("popstate", function(event) {
-    let bookmarkOpen = document.getElementById("bookmarkModal").style.display === "flex";
-    let historyOpen = document.getElementById("historyModal").style.display === "flex";
-    let settingsOpen = document.getElementById("settingsModal").style.display === "flex";
-    let generalOpen = document.getElementById("generalPage").style.display === "block";
-    let privacyOpen = document.getElementById("privacyPage").style.display === "block";
-
-    if (generalOpen || privacyOpen) {
-        backToSettingsMain();
-    } else if (bookmarkOpen || historyOpen || settingsOpen) {
-        hideAllModalsUI();
-    } else {
-        // अगर कोई मॉडल खुला नहीं है, तो भी बैक दबाने पर ऐप बंद न हो, हिस्ट्री दोबारा लॉक हो जाए
-        history.pushState({page: "lock"}, "", "");
-    }
-});
-
-function hideAllModalsUI(){
- document.getElementById("bookmarkModal").style.display="none";
- document.getElementById("historyModal").style.display="none";
- document.getElementById("settingsModal").style.display="none";
-}
-
-function closeAllModals(){
- hideAllModalsUI();
-}
-
-function updateSearchEngine(val){
- currentEngine=val;
-}
-
-function toggleDesktopMode(){
- isDesktop = !isDesktop;
- let btn = document.getElementById("desktopBtn");
- let vp = document.querySelector('meta[name="viewport"]');
- if(isDesktop){
-  btn.classList.add("active-mode");
-  vp.setAttribute("content", "width=1024");
-  if(window.AppInventor){ window.AppInventor.setWebViewString("DESKTOP:ON"); }
- } else {
-  btn.classList.remove("active-mode");
-  vp.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
-  if(window.AppInventor){ window.AppInventor.setWebViewString("DESKTOP:OFF"); }
- }
-}
+const iframe = document.getElementById('browserView');
+const homeView = document.getElementById('homeView');
 
 function searchWeb(){
  let q=document.getElementById("address").value.trim();
@@ -334,7 +344,11 @@ function openWebsite(url){
  h.unshift(url);
  h=[...new Set(h)].slice(0,20);
  localStorage.setItem("nexHistory",JSON.stringify(h));
- window.location.href = url;
+
+ homeView.style.display = "none";
+ iframe.style.display = "block";
+ iframe.src = url;
+ closeAllModals();
 }
 
 function openExternalLink(url){
@@ -345,11 +359,50 @@ function openExternalLink(url){
  }
 }
 
+function changeLanguage(langCode) {
+    document.documentElement.lang = langCode;
+}
+
 function goHome(){
  closeAllModals();
+ iframe.style.display = "none";
+ homeView.style.display = "block";
  currentURL="";
  document.getElementById("address").value="";
- window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goBackBrowser(){
+ try {
+  if(iframe.style.display === "block" && iframe.contentWindow.history.length > 1) {
+   iframe.contentWindow.history.back();
+  } else {
+   goHome();
+  }
+ } catch(e) {
+  goHome();
+ }
+}
+
+function goForwardBrowser(){
+ try {
+  if(iframe.style.display === "block") {
+   iframe.contentWindow.history.forward();
+  }
+ } catch(e) {}
+}
+
+function toggleDesktopMode(){
+ isDesktop = !isDesktop;
+ let textEl = document.getElementById("desktopText");
+ if(isDesktop){
+  textEl.innerText = "Desktop Mode: ON";
+  iframe.style.width = "1024px";
+  if(window.AppInventor){ window.AppInventor.setWebViewString("DESKTOP:ON"); }
+ } else {
+  textEl.innerText = "Desktop Mode: OFF";
+  iframe.style.width = "100%";
+  if(window.AppInventor){ window.AppInventor.setWebViewString("DESKTOP:OFF"); }
+ }
 }
 
 function saveBookmark(){
@@ -366,7 +419,7 @@ function renderBookmarks(){
  let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
  document.getElementById("bookmarksList").innerHTML=
  b.map((url,i)=>`<div class="item">
- <a href="${url}" style="color:#db2777;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
+ <a href="#" onclick="openWebsite('${url}');closeAllModals();return false;" style="color:#db2777;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
  <button onclick="deleteBookmark(${i})">✕</button>
  </div>`).join("")||"<p style='color:#64748b;font-size:13px;text-align:center;padding:15px;'>No bookmarks yet.</p>";
 }
@@ -381,14 +434,13 @@ function deleteBookmark(i){
 function openBookmarkModal(){
  renderBookmarks();
  document.getElementById("bookmarkModal").style.display="flex";
- history.pushState({page: "lock"}, "", "");
 }
 
 function renderHistory(){
  let h=JSON.parse(localStorage.getItem("nexHistory")||"[]");
  document.getElementById("historyList").innerHTML=
  h.map((url)=>`<div class="item">
- <a href="${url}" style="color:#db2777;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
+ <a href="#" onclick="openWebsite('${url}');closeAllModals();return false;" style="color:#db2777;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
  </div>`).join("")||"<p style='color:#64748b;font-size:13px;text-align:center;padding:15px;'>No history yet.</p>";
 }
 
@@ -398,27 +450,31 @@ function clearHistory(){
 }
 
 function openHistoryModal(){
+ closeAllModals();
  renderHistory();
  document.getElementById("historyModal").style.display="flex";
- history.pushState({page: "lock"}, "", "");
 }
 
 function openSettingsModal(){
  backToSettingsMain();
  document.getElementById("settingsModal").style.display="flex";
- history.pushState({page: "lock"}, "", "");
 }
 
 function openSubPage(pageId){
  document.getElementById("settingsMainView").style.display="none";
  document.querySelectorAll(".sub-page").forEach(p => p.style.display="none");
  document.getElementById(pageId).style.display="block";
- history.pushState({page: "lock"}, "", "");
 }
 
 function backToSettingsMain(){
  document.querySelectorAll(".sub-page").forEach(p => p.style.display="none");
  document.getElementById("settingsMainView").style.display="block";
+}
+
+function closeAllModals(){
+ document.getElementById("bookmarkModal").style.display="none";
+ document.getElementById("historyModal").style.display="none";
+ document.getElementById("settingsModal").style.display="none";
 }
 </script>
 </body>
