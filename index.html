@@ -265,30 +265,22 @@ let currentURL="";
 let currentEngine="duckduckgo";
 let isDesktop=false;
 
-// स्वाइप या बैक करने पर मॉडल्स को मैनेज करने के लिए
+// यह मैजिक कोड बैक बटन या स्वाइप को हमेशा होम या मॉडल्स के अंदर ही रोके रखेगा, बाहर नहीं जाने देगा
+history.pushState({page: "lock"}, "", "");
 window.addEventListener("popstate", function(event) {
-    if (event.state && event.state.modal) {
-        if (event.state.modal === 'bookmarks') {
-            document.getElementById("bookmarkModal").style.display = "flex";
-            document.getElementById("historyModal").style.display = "none";
-            document.getElementById("settingsModal").style.display = "none";
-        } else if (event.state.modal === 'history') {
-            document.getElementById("historyModal").style.display = "flex";
-            document.getElementById("bookmarkModal").style.display = "none";
-            document.getElementById("settingsModal").style.display = "none";
-        } else if (event.state.modal === 'settings') {
-            document.getElementById("settingsModal").style.display = "flex";
-            document.getElementById("bookmarkModal").style.display = "none";
-            document.getElementById("historyModal").style.display = "none";
-            backToSettingsMain();
-        } else if (event.state.modal === 'general' || event.state.modal === 'privacy') {
-            document.getElementById("settingsModal").style.display = "flex";
-            document.getElementById("settingsMainView").style.display = "none";
-            document.querySelectorAll(".sub-page").forEach(p => p.style.display = "none");
-            document.getElementById(event.state.modal === 'general' ? 'generalPage' : 'privacyPage').style.display = "block";
-        }
-    } else {
+    let bookmarkOpen = document.getElementById("bookmarkModal").style.display === "flex";
+    let historyOpen = document.getElementById("historyModal").style.display === "flex";
+    let settingsOpen = document.getElementById("settingsModal").style.display === "flex";
+    let generalOpen = document.getElementById("generalPage").style.display === "block";
+    let privacyOpen = document.getElementById("privacyPage").style.display === "block";
+
+    if (generalOpen || privacyOpen) {
+        backToSettingsMain();
+    } else if (bookmarkOpen || historyOpen || settingsOpen) {
         hideAllModalsUI();
+    } else {
+        // अगर कोई मॉडल खुला नहीं है, तो भी बैक दबाने पर ऐप बंद न हो, हिस्ट्री दोबारा लॉक हो जाए
+        history.pushState({page: "lock"}, "", "");
     }
 });
 
@@ -300,7 +292,6 @@ function hideAllModalsUI(){
 
 function closeAllModals(){
  hideAllModalsUI();
- history.replaceState(null, "", window.location.pathname);
 }
 
 function updateSearchEngine(val){
@@ -390,7 +381,7 @@ function deleteBookmark(i){
 function openBookmarkModal(){
  renderBookmarks();
  document.getElementById("bookmarkModal").style.display="flex";
- history.pushState({modal: 'bookmarks'}, "", "#bookmarks");
+ history.pushState({page: "lock"}, "", "");
 }
 
 function renderHistory(){
@@ -409,21 +400,20 @@ function clearHistory(){
 function openHistoryModal(){
  renderHistory();
  document.getElementById("historyModal").style.display="flex";
- history.pushState({modal: 'history'}, "", "#history");
+ history.pushState({page: "lock"}, "", "");
 }
 
 function openSettingsModal(){
  backToSettingsMain();
  document.getElementById("settingsModal").style.display="flex";
- history.pushState({modal: 'settings'}, "", "#settings");
+ history.pushState({page: "lock"}, "", "");
 }
 
 function openSubPage(pageId){
  document.getElementById("settingsMainView").style.display="none";
  document.querySelectorAll(".sub-page").forEach(p => p.style.display="none");
  document.getElementById(pageId).style.display="block";
- let subName = pageId === 'generalPage' ? 'general' : 'privacy';
- history.pushState({modal: subName}, "", "#" + subName);
+ history.pushState({page: "lock"}, "", "");
 }
 
 function backToSettingsMain(){
