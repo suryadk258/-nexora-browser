@@ -291,40 +291,10 @@ let currentURL="";
 let currentEngine="duckduckgo";
 let isDesktop=false;
 
-// ऐप के अंदर बैक बटन दबाने पर बाहर जाने से रोकने के लिए स्मार्ट हिस्ट्री मैनेजमेंट
-history.pushState({page: "home"}, "", "");
-
-window.addEventListener("popstate", function(event) {
-    let bookmarkOpen = document.getElementById("bookmarkModal").style.display === "flex";
-    let historyOpen = document.getElementById("historyModal").style.display === "flex";
-    let settingsOpen = document.getElementById("settingsModal").style.display === "flex";
-    let generalOpen = document.getElementById("generalPage").style.display === "block";
-    let privacyOpen = document.getElementById("privacyPage").style.display === "block";
-
-    if (generalOpen || privacyOpen) {
-        backToSettingsMain();
-        history.pushState({page: "home"}, "", "");
-    } else if (bookmarkOpen || historyOpen || settingsOpen) {
-        hideAllModalsUI();
-        history.pushState({page: "home"}, "", "");
-    } else {
-        // अगर कोई वेबसाइट खुली है तो अंदर ही पीछे जाओ, ऐप से बाहर मत निकलो
-        if (window.history.length > 1) {
-            window.history.back();
-        } else {
-            goHome();
-        }
-    }
-});
-
-function hideAllModalsUI(){
+function closeAllModals(){
  document.getElementById("bookmarkModal").style.display="none";
  document.getElementById("historyModal").style.display="none";
  document.getElementById("settingsModal").style.display="none";
-}
-
-function closeAllModals(){
- hideAllModalsUI();
 }
 
 function updateSearchEngine(val){
@@ -338,11 +308,9 @@ function toggleDesktopMode(){
  if(isDesktop){
   textEl.innerText = "Desktop Mode: ON";
   vp.setAttribute("content", "width=1024");
-  if(window.AppInventor){ window.AppInventor.setWebViewString("DESKTOP:ON"); }
  } else {
   textEl.innerText = "Desktop Mode: OFF";
   vp.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
-  if(window.AppInventor){ window.AppInventor.setWebViewString("DESKTOP:OFF"); }
  }
 }
 
@@ -384,15 +352,11 @@ function goHome(){
  currentURL="";
  document.getElementById("address").value="";
  window.scrollTo({top:0,behavior:'smooth'});
+ window.location.href = window.location.pathname; // होमपेज पर रीडायरेक्ट करने के लिए
 }
 
 function goBackBrowser(){
- // सुरक्षित बैक फंक्शन ताकि ऐप से बाहर न फेंके
- if(window.history.length > 1) {
-  window.history.back();
- } else {
-  goHome();
- }
+ window.history.back();
 }
 
 function goForwardBrowser(){
@@ -428,7 +392,6 @@ function deleteBookmark(i){
 function openBookmarkModal(){
  renderBookmarks();
  document.getElementById("bookmarkModal").style.display="flex";
- history.pushState({page: "lock"}, "", "");
 }
 
 function renderHistory(){
@@ -448,20 +411,17 @@ function openHistoryModal(){
  closeAllModals();
  renderHistory();
  document.getElementById("historyModal").style.display="flex";
- history.pushState({page: "lock"}, "", "");
 }
 
 function openSettingsModal(){
  backToSettingsMain();
  document.getElementById("settingsModal").style.display="flex";
- history.pushState({page: "lock"}, "", "");
 }
 
 function openSubPage(pageId){
  document.getElementById("settingsMainView").style.display="none";
  document.querySelectorAll(".sub-page").forEach(p => p.style.display="none");
  document.getElementById(pageId).style.display="block";
- history.pushState({page: "lock"}, "", "");
 }
 
 function backToSettingsMain(){
