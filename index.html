@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#d946ef">
-<title>NEXORA Browser</title>
+<title>JEFROX Browser</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -24,6 +24,8 @@ header{
  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
+
+/* JEFROX का 3D अलग-अलग रंगों वाला लोगो */
 .logo {
  font-size: 42px;
  font-weight: 900;
@@ -31,12 +33,12 @@ header{
  display: inline-block;
  text-transform: uppercase;
 }
-.l-n { color: #00f2fe; text-shadow: 0 4px 0 #0072ff, 0 8px 20px rgba(0,242,254,0.8); }
+.l-j { color: #00f2fe; text-shadow: 0 4px 0 #0072ff, 0 8px 20px rgba(0,242,254,0.8); }
 .l-e { color: #00ff87; text-shadow: 0 4px 0 #10b981, 0 8px 20px rgba(0,255,135,0.8); }
-.l-x { color: #ffe600; text-shadow: 0 4px 0 #f59e0b, 0 8px 20px rgba(255,230,0,0.8); }
-.l-o { color: #ff2a6d; text-shadow: 0 4px 0 #be185d, 0 8px 20px rgba(255,42,109,0.8); }
-.l-r { color: #ffffff; text-shadow: 0 4px 0 #6d28d9, 0 0 20px #8b5cf6, 0 0 30px #c084fc; }
-.l-a { color: #ff5e00; text-shadow: 0 4px 0 #c2410c, 0 8px 20px rgba(255,94,0,0.8); }
+.l-f { color: #ffe600; text-shadow: 0 4px 0 #f59e0b, 0 8px 20px rgba(255,230,0,0.8); }
+.l-r { color: #ff2a6d; text-shadow: 0 4px 0 #be185d, 0 8px 20px rgba(255,42,109,0.8); }
+.l-o { color: #ffffff; text-shadow: 0 4px 0 #6d28d9, 0 0 20px #8b5cf6, 0 0 30px #c084fc; }
+.l-x { color: #ff5e00; text-shadow: 0 4px 0 #c2410c, 0 8px 20px rgba(255,94,0,0.8); }
 
 .container{max-width:850px;margin:auto;padding:18px 14px}
 .search{
@@ -137,7 +139,7 @@ header{
  flex:1;
 }
 .bottom-item span{font-size:18px}
-.active-mode{color:#db2777 !important; border-bottom: 2px solid #db2777;}
+.active-mode{color:#db2777 !important;}
 </style>
 </head>
 
@@ -145,7 +147,7 @@ header{
 
 <header>
  <div class="logo">
-  <span class="l-n">N</span><span class="l-e">E</span><span class="l-x">X</span><span class="l-o">O</span><span class="l-r">R</span><span class="l-a">A</span>
+  <span class="l-j">J</span><span class="l-e">E</span><span class="l-f">F</span><span class="l-r">R</span><span class="l-o">O</span><span class="l-x">X</span>
  </div>
 </header>
 
@@ -165,7 +167,7 @@ header{
  <div class="grid">
   <div class="site" onclick="openWebsite('https://duckduckgo.com')"><span>🦆</span><p>DuckDuckGo</p></div>
   <div class="site" onclick="openWebsite('https://www.wikipedia.org')"><span>📚</span><p>Wikipedia</p></div>
-  <div class="site" onclick="openWebsite('https://github.com')"><span>💻</span><p>GitHub</p></div>
+  <div class="site" onclick="openWebsite('https://www.youtube.com')"><span>▶️</span><p>YouTube</p></div>
   <div class="site" onclick="openWebsite('https://www.mozilla.org')"><span>🦊</span><p>Mozilla</p></div>
   <div class="site" onclick="openWebsite('https://www.bing.com')"><span>🔎</span><p>Bing</p></div>
   <div class="site" onclick="openWebsite('https://www.openstreetmap.org')"><span>🗺️</span><p>Maps</p></div>
@@ -177,7 +179,7 @@ header{
  <div class="modal-content">
   <div class="modal-header">
    <h2>Bookmarks</h2>
-   <button class="close-btn" onclick="triggerBack()">✕</button>
+   <button class="close-btn" onclick="closeAllModals()">✕</button>
   </div>
   <button onclick="saveBookmark()" style="background:linear-gradient(135deg,#db2777,#f59e0b);color:#fff;border:0;padding:11px;border-radius:10px;margin-bottom:15px;font-weight:bold;cursor:pointer;width:100%;">+ Save Current Page</button>
   <div id="bookmarksList"></div>
@@ -189,7 +191,7 @@ header{
  <div class="modal-content">
   <div class="modal-header">
    <h2>History</h2>
-   <button class="close-btn" onclick="triggerBack()">✕</button>
+   <button class="close-btn" onclick="closeAllModals()">✕</button>
   </div>
   <div id="historyList"></div>
   <button onclick="clearHistory()" style="background:#ef4444;color:#fff;border:0;padding:11px;border-radius:10px;margin-top:15px;font-weight:bold;cursor:pointer;width:100%;">Clear History</button>
@@ -202,7 +204,7 @@ header{
   <div id="settingsMainView">
    <div class="modal-header">
     <h2>Settings</h2>
-    <button class="close-btn" onclick="triggerBack()">✕</button>
+    <button class="close-btn" onclick="closeAllModals()">✕</button>
    </div>
    <div class="setting-row" onclick="openSubPage('generalPage')">
     <div><h4>General & Language</h4><p>Language, Homepage, Search settings</p></div>
@@ -221,7 +223,7 @@ header{
   <!-- 1. General & Language पेज -->
   <div id="generalPage" class="sub-page">
    <div class="modal-header">
-    <h2><span onclick="triggerBack()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> General</h2>
+    <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> General</h2>
     <button class="close-btn" onclick="closeAllModals()">✕</button>
    </div>
    <div class="setting-row">
@@ -237,11 +239,11 @@ header{
   <!-- 2. Privacy Policy पेज -->
   <div id="privacyPage" class="sub-page">
    <div class="modal-header">
-    <h2><span onclick="triggerBack()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Privacy Policy</h2>
+    <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Privacy Policy</h2>
     <button class="close-btn" onclick="closeAllModals()">✕</button>
    </div>
    <div style="font-size:13px;color:#475569;line-height:1.6;padding:8px 0;">
-    <p><strong>NEXORA Browser Privacy Policy:</strong></p>
+    <p><strong>JEFROX Browser Privacy Policy:</strong></p>
     <p style="margin-top:6px;">1. आपकी ब्राउज़िंग हिस्ट्री और बुकमार्क केवल आपके फोन के लोकल स्टोरेज में सुरक्षित रहते हैं।</p>
     <p style="margin-top:6px;">2. हम आपका कोई भी व्यक्तिगत डेटा किसी बाहरी सर्वर पर सेव नहीं करते हैं।</p>
    </div>
@@ -263,16 +265,32 @@ let currentURL="";
 let currentEngine="duckduckgo";
 let isDesktop=false;
 
-window.addEventListener("popstate", function() {
- let subOpen = false;
- document.querySelectorAll(".sub-page").forEach(p => {
-  if(p.style.display === "block") subOpen = true;
- });
- if(subOpen){ backToSettingsMain(); } else { hideAllModalsUI(); }
+// स्वाइप या बैक करने पर मॉडल्स को मैनेज करने के लिए
+window.addEventListener("popstate", function(event) {
+    if (event.state && event.state.modal) {
+        if (event.state.modal === 'bookmarks') {
+            document.getElementById("bookmarkModal").style.display = "flex";
+            document.getElementById("historyModal").style.display = "none";
+            document.getElementById("settingsModal").style.display = "none";
+        } else if (event.state.modal === 'history') {
+            document.getElementById("historyModal").style.display = "flex";
+            document.getElementById("bookmarkModal").style.display = "none";
+            document.getElementById("settingsModal").style.display = "none";
+        } else if (event.state.modal === 'settings') {
+            document.getElementById("settingsModal").style.display = "flex";
+            document.getElementById("bookmarkModal").style.display = "none";
+            document.getElementById("historyModal").style.display = "none";
+            backToSettingsMain();
+        } else if (event.state.modal === 'general' || event.state.modal === 'privacy') {
+            document.getElementById("settingsModal").style.display = "flex";
+            document.getElementById("settingsMainView").style.display = "none";
+            document.querySelectorAll(".sub-page").forEach(p => p.style.display = "none");
+            document.getElementById(event.state.modal === 'general' ? 'generalPage' : 'privacyPage').style.display = "block";
+        }
+    } else {
+        hideAllModalsUI();
+    }
 });
-
-function pushNavState(stateName){ history.pushState({view: stateName}, "", "#" + stateName); }
-function triggerBack(){ history.back(); }
 
 function hideAllModalsUI(){
  document.getElementById("bookmarkModal").style.display="none";
@@ -372,7 +390,7 @@ function deleteBookmark(i){
 function openBookmarkModal(){
  renderBookmarks();
  document.getElementById("bookmarkModal").style.display="flex";
- pushNavState("bookmarks");
+ history.pushState({modal: 'bookmarks'}, "", "#bookmarks");
 }
 
 function renderHistory(){
@@ -391,20 +409,21 @@ function clearHistory(){
 function openHistoryModal(){
  renderHistory();
  document.getElementById("historyModal").style.display="flex";
- pushNavState("history");
+ history.pushState({modal: 'history'}, "", "#history");
 }
 
 function openSettingsModal(){
  backToSettingsMain();
  document.getElementById("settingsModal").style.display="flex";
- pushNavState("settings");
+ history.pushState({modal: 'settings'}, "", "#settings");
 }
 
 function openSubPage(pageId){
  document.getElementById("settingsMainView").style.display="none";
  document.querySelectorAll(".sub-page").forEach(p => p.style.display="none");
  document.getElementById(pageId).style.display="block";
- pushNavState(pageId);
+ let subName = pageId === 'generalPage' ? 'general' : 'privacy';
+ history.pushState({modal: subName}, "", "#" + subName);
 }
 
 function backToSettingsMain(){
