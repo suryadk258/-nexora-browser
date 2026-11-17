@@ -3,105 +3,170 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d18">
+<meta name="theme-color" content="#d946ef">
 <title>NEXORA Browser</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
- background:#080d18;color:#fff;
- font-family:Arial,sans-serif;
- min-height:100vh;
+ background: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #f43f5e 100%);
+ background-attachment: fixed;
+ color: #fff;
+ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+ min-height: 100vh;
+ padding-bottom: 75px;
 }
 header{
- text-align:center;padding:25px 15px 20px;
- background:linear-gradient(135deg,#101b39,#172d55);
+ text-align: center;
+ padding: 26px 15px;
+ background: rgba(255, 255, 255, 0.15);
+ backdrop-filter: blur(15px);
+ border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
-.logo{
- font-size:34px;font-weight:900;letter-spacing:4px;
- background:linear-gradient(90deg,#40e5ff,#a78bfa);
- -webkit-background-clip:text;color:transparent;
+
+/* 3D NEXORA नाम जिसमें 'R' अब एकदम साफ और गहरा दिखेगा */
+.logo {
+ font-size: 44px;
+ font-weight: 900;
+ letter-spacing: 5px;
+ font-family: 'Segoe UI', Roboto, sans-serif;
+ display: inline-block;
+ text-transform: uppercase;
 }
-header p{font-size:11px;color:#a8bddb;margin-top:7px;letter-spacing:2px}
-.container{max-width:850px;margin:auto;padding:18px 14px}
+.l-n { color: #00f2fe; text-shadow: 0 4px 0 #0072ff, 0 8px 20px rgba(0,242,254,0.8); }
+.l-e { color: #00ff87; text-shadow: 0 4px 0 #10b981, 0 8px 20px rgba(0,255,135,0.8); }
+.l-x { color: #ffe600; text-shadow: 0 4px 0 #f59e0b, 0 8px 20px rgba(255,230,0,0.8); }
+.l-o { color: #ff2a6d; text-shadow: 0 4px 0 #be185d, 0 8px 20px rgba(255,42,109,0.8); }
+.l-r { color: #ffffff; text-shadow: 0 4px 0 #6d28d9, 0 0 20px #8b5cf6, 0 0 30px #c084fc; } /* R अब एकदम चमकीला और साफ दिखेगा */
+.l-a { color: #ff5e00; text-shadow: 0 4px 0 #c2410c, 0 8px 20px rgba(255,94,0,0.8); }
+
+.container{max-width:850px;margin:auto;padding:20px 14px}
 .search{
  display:flex;align-items:center;gap:8px;
- background:#17243a;border:1px solid #354b69;
- border-radius:16px;padding:7px;
+ background:#ffffff;border:none;
+ border-radius:30px;padding:10px 18px;
+ box-shadow:0 8px 30px rgba(0,0,0,0.25);
 }
 .search input{
  flex:1;min-width:0;background:transparent;
- border:0;outline:0;color:white;
- padding:13px 8px;font-size:15px;
+ border:0;outline:0;color:#1e293b;
+ padding:9px 4px;font-size:16px;
 }
 .search button{
- background:#42d9f5;border:0;color:#07131b;
- padding:13px 17px;border-radius:11px;
- font-weight:bold;
+ background:linear-gradient(135deg, #ec4899, #f59e0b);
+ border:0;color:#fff;
+ padding:10px 18px;border-radius:22px;
+ font-weight:bold;cursor:pointer;
 }
-.controls{display:flex;gap:8px;margin-top:12px}
-.controls button{
- flex:1;background:#17243a;color:#d5e9ff;
- border:1px solid #304765;border-radius:11px;
- padding:12px 4px;font-size:18px;
-}
-.status{font-size:12px;color:#65dafa;margin:14px 4px}
-h3{font-size:15px;margin:24px 0 14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
 .site{
- text-align:center;padding:18px 5px;
- background:#142137;border:1px solid #293e5b;
- border-radius:15px;cursor:pointer;
+ text-align:center;padding:16px 5px;
+ background:rgba(255, 255, 255, 0.95);
+ border-radius:14px;cursor:pointer;
+ box-shadow:0 6px 20px rgba(0,0,0,0.18);
+ transition:transform 0.15s;
 }
-.site:active{transform:scale(.96)}
-.site span{font-size:27px}
-.site p{font-size:12px;color:#d6e5f7;margin-top:9px}
-.panel{
- margin-top:22px;background:#121f33;
- border:1px solid #2a405e;border-radius:15px;padding:16px;
+.site:active{transform:scale(.95)}
+.site span{font-size:25px}
+.site p{font-size:12px;color:#1e293b;font-weight:600;margin-top:8px}
+
+.ad-container{
+ text-align:center;
+ margin:20px 0;
+ background:rgba(255, 255, 255, 0.95);
+ border-radius:14px;
+ padding:10px;
+ min-height:55px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ box-shadow:0 6px 20px rgba(0,0,0,0.18);
 }
-.panel p{font-size:13px;color:#aabbd2;line-height:1.7}
-.panel button{
- background:#1d3b5a;color:#67dcff;border:0;
- border-radius:9px;padding:10px;margin-top:12px;
+
+/* पॉप-अप मॉडल्स */
+.modal{
+ display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+ background:rgba(15, 23, 42, 0.7);z-index:2000;
+ justify-content:flex-end;flex-direction:column;
 }
+.modal-content{
+ background:#fff;border-top-left-radius:24px;border-top-right-radius:24px;
+ width:100%;max-height:85vh;overflow-y:auto;padding:20px;color:#1e293b;
+ box-shadow:0 -4px 25px rgba(0,0,0,0.3);
+}
+.modal-header{
+ display:flex;align-items:center;
+ border-bottom:1px solid #e2e8f0;padding-bottom:12px;margin-bottom:15px;
+}
+.modal-header h2{font-size:18px;color:#1e293b;font-weight:700;display:flex;align-items:center;gap:10px;}
+.close-btn{background:transparent;border:0;color:#64748b;font-size:22px;cursor:pointer;margin-left:auto;}
+
+.setting-row{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:14px 4px;border-bottom:1px solid #f1f5f9;cursor:pointer;
+}
+.setting-row div h4{font-size:15px;color:#1e293b;font-weight:600;margin-bottom:2px;}
+.setting-row div p{font-size:12px;color:#64748b;}
+.setting-row span{color:#db2777;font-size:18px;font-weight:bold;}
+
+.sub-page{display:none;}
+
 .item{
- font-size:12px;color:#6bdcff;
- display:block;margin-top:12px;
- word-break:break-all;
+ font-size:13px;color:#db2777;
+ display:flex;justify-content:space-between;align-items:center;
+ margin-top:10px;background:#f8fafc;padding:12px;border-radius:10px;
+ border:1px solid #e2e8f0;word-break:break-all;
 }
-footer{text-align:center;color:#70829b;font-size:12px;padding:28px 10px}
+.item button{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:6px;cursor:pointer;}
+
+/* बॉटम नेविगेशन बार */
+.bottom-bar{
+ position:fixed;
+ bottom:0;left:0;width:100%;
+ background:#ffffff;
+ border-top:1px solid #e2e8f0;
+ display:flex;
+ justify-content:space-around;
+ align-items:center;
+ padding:8px 5px;
+ z-index:1000;
+ box-shadow:0 -2px 15px rgba(0,0,0,0.1);
+}
+.bottom-item{
+ background:transparent;border:0;color:#475569;
+ font-size:11px;font-weight:600;text-align:center;cursor:pointer;
+ display:flex;flex-direction:column;align-items:center;gap:3px;
+ flex:1;
+}
+.bottom-item span{font-size:20px}
 </style>
 </head>
 
 <body>
 
 <header>
- <div class="logo">NEXORA</div>
- <p>YOUR WORLD • YOUR BROWSER</p>
+ <div class="logo">
+  <span class="l-n">N</span><span class="l-e">E</span><span class="l-x">X</span><span class="l-o">O</span><span class="l-r">R</span><span class="l-a">A</span>
+ </div>
 </header>
 
 <main class="container">
 
  <div class="search">
-  <span>🌐</span>
+  <span>🔍</span>
   <input id="address" placeholder="Search or enter website..."
   onkeydown="if(event.key==='Enter')searchWeb()">
   <button onclick="searchWeb()">GO</button>
  </div>
 
- <div class="controls">
-  <button onclick="goBack()">←</button>
-  <button onclick="goForward()">→</button>
-  <button onclick="refreshPage()">↻</button>
-  <button onclick="goHome()">⌂</button>
+ <!-- Start.io Ad Banner -->
+ <div class="ad-container">
+  <script type="text/javascript">
+    document.write('<scr' + 'ipt type="text/javascript" src="https://statict.startappservice.com/js/smaandro.js?appId=210611342"></scr' + 'ipt>');
+  </script>
  </div>
-
- <div class="status" id="status">
-  Welcome to NEXORA Browser
- </div>
-
- <h3>⚡ QUICK ACCESS</h3>
 
  <div class="grid">
   <div class="site" onclick="openWebsite('https://duckduckgo.com')">
@@ -124,32 +189,187 @@ footer{text-align:center;color:#70829b;font-size:12px;padding:28px 10px}
   </div>
  </div>
 
- <div class="panel">
-  <h3>🔖 BOOKMARKS</h3>
-  <p>अपनी पसंदीदा वेबसाइट सेव करें।</p>
-  <button onclick="saveBookmark()">+ Save Website</button>
-  <div id="bookmarks"></div>
- </div>
-
- <div class="panel">
-  <h3>🕘 HISTORY</h3>
-  <div id="historyList"></div>
-  <button onclick="clearHistory()">Clear History</button>
- </div>
-
- <div class="panel">
-  <h3>✨ ABOUT NEXORA</h3>
-  <p>आपका अपना वेब ब्राउज़र। डिफॉल्ट सर्च DuckDuckGo है। Google Search का उपयोग नहीं किया गया है।</p>
- </div>
-
 </main>
 
-<footer>© 2026 NEXORA BROWSER</footer>
+<!-- बुकमार्क पॉप-अप -->
+<div class="modal" id="bookmarkModal">
+ <div class="modal-content">
+  <div class="modal-header">
+   <h2>Bookmarks</h2>
+   <button class="close-btn" onclick="triggerBack()">✕</button>
+  </div>
+  <button onclick="saveBookmark()" style="background:linear-gradient(135deg,#db2777,#f59e0b);color:#fff;border:0;padding:11px;border-radius:10px;margin-bottom:15px;font-weight:bold;cursor:pointer;width:100%;">+ Save Current Page</button>
+  <div id="bookmarksList"></div>
+ </div>
+</div>
+
+<!-- हिस्ट्री पॉप-अप -->
+<div class="modal" id="historyModal">
+ <div class="modal-content">
+  <div class="modal-header">
+   <h2>History</h2>
+   <button class="close-btn" onclick="triggerBack()">✕</button>
+  </div>
+  <div id="historyList"></div>
+  <button onclick="clearHistory()" style="background:#ef4444;color:#fff;border:0;padding:11px;border-radius:10px;margin-top:15px;font-weight:bold;cursor:pointer;width:100%;">Clear History</button>
+ </div>
+</div>
+
+<!-- सेटिंग्स मेनू और उसके अंदर के पेज -->
+<div class="modal" id="settingsModal">
+ <div class="modal-content">
+  
+  <!-- मेन सेटिंग्स लिस्ट -->
+  <div id="settingsMainView">
+   <div class="modal-header">
+    <h2>Settings</h2>
+    <button class="close-btn" onclick="triggerBack()">✕</button>
+   </div>
+   <div class="setting-row" onclick="openSubPage('generalPage')">
+    <div><h4>General</h4><p>Language, Homepage, Search settings</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="openSubPage('privacyPage')">
+    <div><h4>Privacy</h4><p>Do not track, WebRTC, Data protection</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="openSubPage('scriptsPage')">
+    <div><h4>Scripts</h4><p>User scripts and ad tags</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="openSubPage('aboutPage')">
+    <div><h4>About</h4><p>Version 7.3.3, Telegram & Links</p></div>
+    <span>›</span>
+   </div>
+  </div>
+
+  <!-- 1. General पेज -->
+  <div id="generalPage" class="sub-page">
+   <div class="modal-header">
+    <h2><span onclick="triggerBack()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> General</h2>
+    <button class="close-btn" onclick="closeAllModals()">✕</button>
+   </div>
+   <div class="setting-row">
+    <div><h4>Search Engine</h4><p>DuckDuckGo / Google / Bing</p></div>
+    <select id="searchEngine" onchange="updateSearchEngine(this.value)" style="padding:6px;border-radius:6px;border:1px solid #cbd5e1;">
+     <option value="duckduckgo">DuckDuckGo</option>
+     <option value="google">Google</option>
+     <option value="bing">Bing</option>
+    </select>
+   </div>
+   <div class="setting-row">
+    <div><h4>Download location</h4><p>/sdcard/Download</p></div>
+   </div>
+  </div>
+
+  <!-- 2. Privacy पेज -->
+  <div id="privacyPage" class="sub-page">
+   <div class="modal-header">
+    <h2><span onclick="triggerBack()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Privacy</h2>
+    <button class="close-btn" onclick="closeAllModals()">✕</button>
+   </div>
+   <div class="setting-row">
+    <div><h4>Do not track</h4><p>Request websites not to track you</p></div>
+    <input type="checkbox" checked style="width:20px;height:20px;accent-color:#db2777;">
+   </div>
+   <div class="setting-row">
+    <div><h4>Disable WebRTC</h4><p>Prevent IP leakage</p></div>
+    <input type="checkbox" style="width:20px;height:20px;accent-color:#db2777;">
+   </div>
+  </div>
+
+  <!-- 3. Scripts पेज -->
+  <div id="scriptsPage" class="sub-page">
+   <div class="modal-header">
+    <h2><span onclick="triggerBack()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Scripts</h2>
+    <button class="close-btn" onclick="closeAllModals()">✕</button>
+   </div>
+   <div style="text-align:center;padding:30px;color:#64748b;">
+    <p style="font-size:26px;margin-bottom:8px;">¯\_(ツ)_/¯</p>
+    <p style="font-size:13px;">No custom scripts added</p>
+   </div>
+  </div>
+
+  <!-- 4. About पेज -->
+  <div id="aboutPage" class="sub-page">
+   <div class="modal-header">
+    <h2><span onclick="triggerBack()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> About</h2>
+    <button class="close-btn" onclick="closeAllModals()">✕</button>
+   </div>
+   <div style="text-align:center;padding:10px 0 15px;">
+    <h3 style="color:#db2777;font-size:18px;">NEXORA Browser</h3>
+    <p style="color:#64748b;font-size:12px;margin-top:2px;">7.3.3</p>
+   </div>
+   <div class="setting-row" onclick="window.open('https://t.me/suryaearningtips','_blank')">
+    <div><h4>Join Telegram Group</h4><p>Official earning tips & updates</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="window.open('https://t.me/Jafarearningtrick','_blank')">
+    <div><h4>Join Jafar Earning Trick</h4><p>Exclusive tricks & offers</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="alert('Email: support@nexora.com')">
+    <div><h4>Email me</h4><p>Contact developer</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="alert('Privacy Policy: All browsing data is stored securely and locally.')">
+    <div><h4>Privacy policy</h4><p>Read terms</p></div>
+    <span>›</span>
+   </div>
+  </div>
+
+ </div>
+</div>
+
+<!-- सबसे नीचे फिक्स एक्शन बार -->
+<div class="bottom-bar">
+ <button class="bottom-item" onclick="goHome()"><span>⌂</span>Home</button>
+ <button class="bottom-item" onclick="openBookmarkModal()"><span>⭐</span>Bookmark</button>
+ <button class="bottom-item" onclick="openHistoryModal()"><span>📜</span>History</button>
+ <button class="bottom-item" onclick="shareApp()"><span>🔗</span>Share</button>
+ <button class="bottom-item" onclick="openSettingsModal()"><span>⚙️</span>Settings</button>
+</div>
 
 <script>
 let currentURL="";
-let backStack=[];
-let forwardStack=[];
+let currentEngine="duckduckgo";
+
+window.addEventListener("popstate", function(event) {
+ let subOpen = false;
+ document.querySelectorAll(".sub-page").forEach(p => {
+  if(p.style.display === "block") subOpen = true;
+ });
+
+ if(subOpen){
+  backToSettingsMain();
+ } else {
+  hideAllModalsUI();
+ }
+});
+
+function pushNavState(stateName){
+ history.pushState({view: stateName}, "", "#" + stateName);
+}
+
+function triggerBack(){
+ history.back();
+}
+
+function hideAllModalsUI(){
+ document.getElementById("bookmarkModal").style.display="none";
+ document.getElementById("historyModal").style.display="none";
+ document.getElementById("settingsModal").style.display="none";
+}
+
+function closeAllModals(){
+ hideAllModalsUI();
+ history.replaceState(null, "", window.location.pathname);
+}
+
+function updateSearchEngine(val){
+ currentEngine=val;
+ alert("Search engine updated to: " + val.toUpperCase());
+}
 
 function searchWeb(){
  let q=document.getElementById("address").value.trim();
@@ -161,67 +381,56 @@ function searchWeb(){
  }else if(q.includes(".")&&!q.includes(" ")){
   url="https://"+q;
  }else{
-  url="https://duckduckgo.com/?q="+encodeURIComponent(q);
+  if(currentEngine==="google"){
+   url="https://www.google.com/search?q="+encodeURIComponent(q);
+  }else if(currentEngine==="bing"){
+   url="https://www.bing.com/search?q="+encodeURIComponent(q);
+  }else{
+   url="https://duckduckgo.com/?q="+encodeURIComponent(q);
+  }
  }
  openWebsite(url);
 }
 
 function openWebsite(url){
- if(currentURL && currentURL!==url){
-  backStack.push(currentURL);
-  forwardStack=[];
- }
  currentURL=url;
  document.getElementById("address").value=url;
- document.getElementById("status").textContent="Opening: "+url;
 
  let h=JSON.parse(localStorage.getItem("nexHistory")||"[]");
  h.unshift(url);
  h=[...new Set(h)].slice(0,20);
  localStorage.setItem("nexHistory",JSON.stringify(h));
- renderHistory();
 
- // यह वेबसाइट नए टैब में खोलता है।
  window.open(url,"_blank");
 }
 
-function goBack(){
- if(backStack.length){
-  forwardStack.push(currentURL);
-  currentURL=backStack.pop();
-  window.open(currentURL,"_blank");
- }
-}
-function goForward(){
- if(forwardStack.length){
-  backStack.push(currentURL);
-  currentURL=forwardStack.pop();
-  window.open(currentURL,"_blank");
- }
-}
-function refreshPage(){
- if(currentURL)window.open(currentURL,"_blank");
-}
 function goHome(){
+ closeAllModals();
  currentURL="";
  document.getElementById("address").value="";
- document.getElementById("status").textContent="Welcome to NEXORA Browser";
+ window.scrollTo({top:0,behavior:'smooth'});
 }
 
+/* बुकमार्क फंक्शन्स */
 function saveBookmark(){
- if(!currentURL){alert("पहले वेबसाइट खोलें");return}
+ if(!currentURL){alert("पहले कोई वेबसाइट खोलें!");return}
  let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
- if(!b.includes(currentURL))b.push(currentURL);
- localStorage.setItem("nexBookmarks",JSON.stringify(b));
- renderBookmarks();
+ if(!b.includes(currentURL)){
+  b.push(currentURL);
+  localStorage.setItem("nexBookmarks",JSON.stringify(b));
+  renderBookmarks();
+  alert("Bookmark saved!");
+ }else{
+  alert("Already bookmarked!");
+ }
 }
 function renderBookmarks(){
  let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
- document.getElementById("bookmarks").innerHTML=
+ document.getElementById("bookmarksList").innerHTML=
  b.map((url,i)=>`<div class="item">
- <a href="${url}" target="_blank" style="color:#6bdcff">${url}</a>
+ <a href="${url}" target="_blank" style="color:#db2777;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
  <button onclick="deleteBookmark(${i})">✕</button>
- </div>`).join("")||"<p>कोई Bookmark नहीं है।</p>";
+ </div>`).join("")||"<p style='color:#64748b;font-size:13px;text-align:center;padding:15px;'>No bookmarks yet.</p>";
 }
 function deleteBookmark(i){
  let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
@@ -229,19 +438,60 @@ function deleteBookmark(i){
  localStorage.setItem("nexBookmarks",JSON.stringify(b));
  renderBookmarks();
 }
+function openBookmarkModal(){
+ renderBookmarks();
+ document.getElementById("bookmarkModal").style.display="flex";
+ pushNavState("bookmarks");
+}
+
+/* हिस्ट्री फंक्शन्स */
 function renderHistory(){
  let h=JSON.parse(localStorage.getItem("nexHistory")||"[]");
  document.getElementById("historyList").innerHTML=
- h.map(url=>`<a class="item" href="${url}" target="_blank">${url}</a>`).join("")
- ||"<p>अभी कोई History नहीं है।</p>";
+ h.map((url,i)=>`<div class="item">
+ <a href="${url}" target="_blank" style="color:#db2777;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
+ </div>`).join("")||"<p style='color:#64748b;font-size:13px;text-align:center;padding:15px;'>No history yet.</p>";
 }
 function clearHistory(){
  localStorage.removeItem("nexHistory");
  renderHistory();
 }
+function openHistoryModal(){
+ renderHistory();
+ document.getElementById("historyModal").style.display="flex";
+ pushNavState("history");
+}
 
-renderBookmarks();
-renderHistory();
+/* सेटिंग्स नेविगेशन */
+function openSettingsModal(){
+ backToSettingsMain();
+ document.getElementById("settingsModal").style.display="flex";
+ pushNavState("settings");
+}
+function openSubPage(pageId){
+ document.getElementById("settingsMainView").style.display="none";
+ document.querySelectorAll(".sub-page").forEach(p => p.style.display="none");
+ document.getElementById(pageId).style.display="block";
+ pushNavState(pageId);
+}
+function backToSettingsMain(){
+ document.querySelectorAll(".sub-page").forEach(p => p.style.display="none");
+ document.getElementById("settingsMainView").style.display="block";
+}
+
+/* शेयर सिस्टम */
+function shareApp(){
+ let shareData = {
+  title: 'NEXORA Browser',
+  text: 'Download NEXORA Browser - Fast & Secure App:',
+  url: 'https://allyonogameearn.github.io'
+ };
+ if(navigator.share){
+  navigator.share(shareData).catch(() => {});
+ }else{
+  prompt("Copy Link to Share:", shareData.url);
+ }
+}
 </script>
 
 </body>
