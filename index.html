@@ -119,7 +119,7 @@ header{
 }
 .item button{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:6px;cursor:pointer;}
 
-/* सबसे नीचे फिक्स एक्शन बार (सफेद बैकग्राउंड और हमेशा दिखने वाले बटन)[span_6](start_span)[span_6](end_span) */
+/* सबसे नीचे फिक्स एक्शन बार (सफेद पट्टी और परमानेंट फिक्स) */
 .bottom-bar{
  position:fixed !important;
  bottom:0 !important;
@@ -277,7 +277,7 @@ header{
  </div>
 </div>
 
-<!-- सबसे नीचे फिक्स नेविगेशन बार (सफेद पट्टी और हमेशा दिखने वाले बटन)[span_7](start_span)[span_7](end_span) -->
+<!-- सबसे नीचे फिक्स नेविगेशन बार (सफेद पट्टी और हमेशा दिखने वाले बटन) -->
 <div class="bottom-bar">
  <button class="bottom-item" onclick="goBackBrowser()">‹</button>
  <button class="bottom-item" onclick="goForwardBrowser()">›</button>
@@ -359,7 +359,7 @@ function openWebsite(url){
  h=[...new Set(h)].slice(0,20);
  localStorage.setItem("nexHistory",JSON.stringify(h));
  
- // ऐप इन्वेंटर / कोगुलर के WebView के साथ कम्युनिकेट करने के लिए
+ // सुरक्षित नेविगेशन जो ऐप और लोकल टेस्ट दोनों में काम करेगा
  if(window.AppInventor){
   window.AppInventor.setWebViewString("URL:" + url);
  } else {
