@@ -291,7 +291,9 @@ let currentURL="";
 let currentEngine="duckduckgo";
 let isDesktop=false;
 
-history.pushState({page: "lock"}, "", "");
+// ऐप के अंदर बैक बटन दबाने पर बाहर जाने से रोकने के लिए स्मार्ट हिस्ट्री मैनेजमेंट
+history.pushState({page: "home"}, "", "");
+
 window.addEventListener("popstate", function(event) {
     let bookmarkOpen = document.getElementById("bookmarkModal").style.display === "flex";
     let historyOpen = document.getElementById("historyModal").style.display === "flex";
@@ -301,10 +303,17 @@ window.addEventListener("popstate", function(event) {
 
     if (generalOpen || privacyOpen) {
         backToSettingsMain();
+        history.pushState({page: "home"}, "", "");
     } else if (bookmarkOpen || historyOpen || settingsOpen) {
         hideAllModalsUI();
+        history.pushState({page: "home"}, "", "");
     } else {
-        history.pushState({page: "lock"}, "", "");
+        // अगर कोई वेबसाइट खुली है तो अंदर ही पीछे जाओ, ऐप से बाहर मत निकलो
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            goHome();
+        }
     }
 });
 
@@ -378,7 +387,12 @@ function goHome(){
 }
 
 function goBackBrowser(){
- window.history.back();
+ // सुरक्षित बैक फंक्शन ताकि ऐप से बाहर न फेंके
+ if(window.history.length > 1) {
+  window.history.back();
+ } else {
+  goHome();
+ }
 }
 
 function goForwardBrowser(){
