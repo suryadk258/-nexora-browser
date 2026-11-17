@@ -117,7 +117,7 @@ header{
 }
 .item button{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:6px;cursor:pointer;}
 
-/* सबसे नीचे फिक्स एक्शन बार */
+/* सबसे नीचे फिक्स एक्शन बार (शेयर बटन अब हटा दिया गया है) */
 .bottom-bar{
  position:fixed;
  bottom:0;left:0;width:100%;
@@ -165,7 +165,6 @@ header{
  <div class="grid">
   <div class="site" onclick="openWebsite('https://duckduckgo.com')"><span>🦆</span><p>DuckDuckGo</p></div>
   <div class="site" onclick="openWebsite('https://www.wikipedia.org')"><span>📚</span><p>Wikipedia</p></div>
-  <!-- यहाँ GitHub अब सीधा वेबसाइट खोलेगा बिना किसी फालतू टेक्स्ट के -->
   <div class="site" onclick="openWebsite('https://github.com')"><span>💻</span><p>GitHub</p></div>
   <div class="site" onclick="openWebsite('https://www.mozilla.org')"><span>🦊</span><p>Mozilla</p></div>
   <div class="site" onclick="openWebsite('https://www.bing.com')"><span>🔎</span><p>Bing</p></div>
@@ -250,13 +249,12 @@ header{
  </div>
 </div>
 
-<!-- सबसे नीचे फिक्स एक्शन बार -->
+<!-- सबसे नीचे फिक्स एक्शन बार (बिना शेयर बटन के) -->
 <div class="bottom-bar">
  <button class="bottom-item" onclick="goHome()"><span>⌂</span>Home</button>
  <button class="bottom-item" onclick="openBookmarkModal()"><span>⭐</span>Bookmark</button>
  <button class="bottom-item" onclick="openHistoryModal()"><span>📜</span>History</button>
  <button class="bottom-item" id="desktopBtn" onclick="toggleDesktopMode()"><span>💻</span>Desktop</button>
- <button class="bottom-item" onclick="shareApp()"><span>🔗</span>Share</button>
  <button class="bottom-item" onclick="openSettingsModal()"><span>⚙️</span>Settings</button>
 </div>
 
@@ -416,22 +414,6 @@ function openSubPage(pageId){
 function backToSettingsMain(){
  document.querySelectorAll(".sub-page").forEach(p => p.style.display="none");
  document.getElementById("settingsMainView").style.display="block";
-}
-
-/* शेयर सिस्टम */
-function shareApp(){
- let shareText = "Download NEXORA Browser - Fast & Secure App: https://allyonogameearn.github.io";
- if(window.AppInventor){
-  window.AppInventor.setWebViewString("SHARE:" + shareText);
- } else if(navigator.share){
-  navigator.share({
-   title: 'NEXORA Browser',
-   text: 'Download NEXORA Browser - Fast & Secure App:',
-   url: 'https://allyonogameearn.github.io'
-  }).catch(() => {});
- } else {
-  prompt("Copy Link to Share:", "https://allyonogameearn.github.io");
- }
 }
 </script>
 </body>
