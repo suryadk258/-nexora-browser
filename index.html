@@ -277,7 +277,7 @@ header{
  </div>
 </div>
 
-<!-- सबसे नीचे फिक्स नेविगेशन बार (सफेद पट्टी और हमेशा दिखने वाले बटन) -->
+<!-- सबसे नीचे फिक्स नेविगेशन बार (सफेद पट्टी और बटन्स) -->
 <div class="bottom-bar">
  <button class="bottom-item" onclick="goBackBrowser()">‹</button>
  <button class="bottom-item" onclick="goForwardBrowser()">›</button>
@@ -359,20 +359,11 @@ function openWebsite(url){
  h=[...new Set(h)].slice(0,20);
  localStorage.setItem("nexHistory",JSON.stringify(h));
  
- // सुरक्षित नेविगेशन जो ऐप और लोकल टेस्ट दोनों में काम करेगा
- if(window.AppInventor){
-  window.AppInventor.setWebViewString("URL:" + url);
- } else {
-  window.location.href = url;
- }
+ window.location.href = url;
 }
 
 function openExternalLink(url){
- if(window.AppInventor){
-  window.AppInventor.setWebViewString("URL:" + url);
- } else {
-  window.open(url, "_blank");
- }
+ window.open(url, "_blank");
 }
 
 function changeLanguage(langCode) {
