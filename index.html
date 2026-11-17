@@ -117,7 +117,7 @@ header{
 }
 .item button{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:6px;cursor:pointer;}
 
-/* सबसे नीचे फिक्स एक्शन बार (शेयर बटन अब हटा दिया गया है) */
+/* सबसे नीचे फिक्स एक्शन बार */
 .bottom-bar{
  position:fixed;
  bottom:0;left:0;width:100%;
@@ -137,7 +137,7 @@ header{
  flex:1;
 }
 .bottom-item span{font-size:18px}
-.active-mode{color:#db2777 !important;}
+.active-mode{color:#db2777 !important; border-bottom: 2px solid #db2777;}
 </style>
 </head>
 
@@ -249,7 +249,7 @@ header{
  </div>
 </div>
 
-<!-- सबसे नीचे फिक्स एक्शन बार (बिना शेयर बटन के) -->
+<!-- सबसे नीचे फिक्स एक्शन बार -->
 <div class="bottom-bar">
  <button class="bottom-item" onclick="goHome()"><span>⌂</span>Home</button>
  <button class="bottom-item" onclick="openBookmarkModal()"><span>⭐</span>Bookmark</button>
@@ -287,7 +287,6 @@ function closeAllModals(){
 
 function updateSearchEngine(val){
  currentEngine=val;
- alert("Search engine: " + val.toUpperCase());
 }
 
 function toggleDesktopMode(){
@@ -298,12 +297,10 @@ function toggleDesktopMode(){
   btn.classList.add("active-mode");
   vp.setAttribute("content", "width=1024");
   if(window.AppInventor){ window.AppInventor.setWebViewString("DESKTOP:ON"); }
-  alert("Desktop Site Mode: ON");
  } else {
   btn.classList.remove("active-mode");
   vp.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
   if(window.AppInventor){ window.AppInventor.setWebViewString("DESKTOP:OFF"); }
-  alert("Desktop Site Mode: OFF");
  }
 }
 
@@ -347,14 +344,13 @@ function goHome(){
 }
 
 function saveBookmark(){
- if(!currentURL){alert("पहले कोई वेबसाइट खोलें!");return}
+ if(!currentURL){return;}
  let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
  if(!b.includes(currentURL)){
   b.push(currentURL);
   localStorage.setItem("nexBookmarks",JSON.stringify(b));
   renderBookmarks();
-  alert("Bookmark saved!");
- }else{ alert("Already bookmarked!"); }
+ }
 }
 
 function renderBookmarks(){
