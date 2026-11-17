@@ -165,6 +165,7 @@ header{
  <div class="grid">
   <div class="site" onclick="openWebsite('https://duckduckgo.com')"><span>🦆</span><p>DuckDuckGo</p></div>
   <div class="site" onclick="openWebsite('https://www.wikipedia.org')"><span>📚</span><p>Wikipedia</p></div>
+  <!-- यहाँ GitHub अब सीधा वेबसाइट खोलेगा बिना किसी फालतू टेक्स्ट के -->
   <div class="site" onclick="openWebsite('https://github.com')"><span>💻</span><p>GitHub</p></div>
   <div class="site" onclick="openWebsite('https://www.mozilla.org')"><span>🦊</span><p>Mozilla</p></div>
   <div class="site" onclick="openWebsite('https://www.bing.com')"><span>🔎</span><p>Bing</p></div>
@@ -212,8 +213,8 @@ header{
     <div><h4>Privacy Policy</h4><p>Do not track, Data protection & Policy</p></div>
     <span>›</span>
    </div>
-   <div class="setting-row" onclick="openSubPage('aboutPage')">
-    <div><h4>Contact & Telegram</h4><p>Version 7.3.3, Join Telegram Channels</p></div>
+   <div class="setting-row" onclick="openExternalLink('https://t.me/kingsearning99')">
+    <div><h4>Telegram Official</h4><p>Join @kingsearning99</p></div>
     <span>›</span>
    </div>
   </div>
@@ -232,13 +233,6 @@ header{
      <option value="bing">Bing</option>
     </select>
    </div>
-   <div class="setting-row">
-    <div><h4>App Language</h4><p>Select interface language</p></div>
-    <select id="appLang" onchange="changeLanguage(this.value)" style="padding:6px;border-radius:6px;border:1px solid #cbd5e1;">
-     <option value="hi">हिन्दी (Hindi)</option>
-     <option value="en">English</option>
-    </select>
-   </div>
   </div>
 
   <!-- 2. Privacy Policy पेज -->
@@ -251,34 +245,6 @@ header{
     <p><strong>NEXORA Browser Privacy Policy:</strong></p>
     <p style="margin-top:6px;">1. आपकी ब्राउज़िंग हिस्ट्री और बुकमार्क केवल आपके फोन के लोकल स्टोरेज में सुरक्षित रहते हैं।</p>
     <p style="margin-top:6px;">2. हम आपका कोई भी व्यक्तिगत डेटा किसी बाहरी सर्वर पर सेव नहीं करते हैं।</p>
-   </div>
-   <div class="setting-row">
-    <div><h4>Do not track</h4><p>Request websites not to track you</p></div>
-    <input type="checkbox" checked style="width:20px;height:20px;accent-color:#db2777;">
-   </div>
-  </div>
-
-  <!-- 3. Contact & Telegram पेज -->
-  <div id="aboutPage" class="sub-page">
-   <div class="modal-header">
-    <h2><span onclick="triggerBack()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Contact & Telegram</h2>
-    <button class="close-btn" onclick="closeAllModals()">✕</button>
-   </div>
-   <div style="text-align:center;padding:8px 0 12px;">
-    <h3 style="color:#db2777;font-size:18px;">NEXORA Browser</h3>
-    <p style="color:#64748b;font-size:12px;">Version 7.3.3</p>
-   </div>
-   <div class="setting-row" onclick="openExternalLink('https://t.me/kingsearning99')">
-    <div><h4>Telegram Official</h4><p>Join @kingsearning99</p></div>
-    <span>›</span>
-   </div>
-   <div class="setting-row" onclick="openExternalLink('https://t.me/suryaearningtips')">
-    <div><h4>Join Telegram Group</h4><p>Official earning tips & updates</p></div>
-    <span>›</span>
-   </div>
-   <div class="setting-row" onclick="openExternalLink('https://t.me/Jafarearningtrick')">
-    <div><h4>Join Jafar Earning Trick</h4><p>Exclusive tricks & offers</p></div>
-    <span>›</span>
    </div>
   </div>
  </div>
@@ -324,11 +290,6 @@ function closeAllModals(){
 function updateSearchEngine(val){
  currentEngine=val;
  alert("Search engine: " + val.toUpperCase());
-}
-
-function changeLanguage(lang){
- document.getElementById("address").placeholder = (lang === "en") ? "Search or enter website..." : "वेबसाइट खोजें या लिंक डालें...";
- alert(lang === "en" ? "Language set to English" : "भाषा हिन्दी सेट कर दी गई है");
 }
 
 function toggleDesktopMode(){
@@ -457,7 +418,7 @@ function backToSettingsMain(){
  document.getElementById("settingsMainView").style.display="block";
 }
 
-/* शेयर सिस्टम: ऐप और ब्राउज़र दोनों के लिए */
+/* शेयर सिस्टम */
 function shareApp(){
  let shareText = "Download NEXORA Browser - Fast & Secure App: https://allyonogameearn.github.io";
  if(window.AppInventor){
