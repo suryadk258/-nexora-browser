@@ -150,7 +150,7 @@ header{
 }
 .item button{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:6px;cursor:pointer;}
 
-/* सबसे नीचे फिक्स एक्शन बार (सफेद पट्टी और परमानेंट फिक्स) */
+/* सबसे नीचे फिक्स एक्शन बार (सफेद पट्टी और 6 बटन्स) */
 .bottom-bar{
  position:fixed !important;
  bottom:0 !important;
@@ -168,11 +168,12 @@ header{
 }
 .bottom-item{
  background:transparent;border:0;color:#334155 !important;
- font-size:24px;font-weight:bold;text-align:center;cursor:pointer;
+ font-size:22px;font-weight:bold;text-align:center;cursor:pointer;
  display:flex;flex-direction:column;align-items:center;justify-content:center;
  flex:1;
  height:100%;
 }
+.bottom-item span{font-size:10px;margin-top:2px;font-weight:600;}
 .bottom-item:active{color:#db2777 !important;}
 </style>
 </head>
@@ -226,6 +227,19 @@ header{
  </div>
 </div>
 
+<!-- डाउनलोड मैनेजर पॉप-अप -->
+<div class="modal" id="downloadModal">
+ <div class="modal-content">
+  <div class="modal-header">
+   <h2>Downloads</h2>
+   <button class="close-btn" onclick="closeAllModals()">✕</button>
+  </div>
+  <div id="downloadsList">
+   <p style='color:#64748b;font-size:13px;text-align:center;padding:15px;'>No downloaded files yet.<br><span style="font-size:11px;color:#94a3b8;">(डाउनलोड की गई फाइलें यहाँ दिखेंगी)</span></p>
+  </div>
+ </div>
+</div>
+
 <!-- हिस्ट्री पॉप-अप -->
 <div class="modal" id="historyModal">
  <div class="modal-content">
@@ -238,7 +252,7 @@ header{
  </div>
 </div>
 
-<!-- सेटिंग्स मेनू -->
+<!-- सेटिंग्स मेनू (3-डॉट मेनू जिसमें Desktop Mode भी है) -->
 <div class="modal" id="settingsModal">
  <div class="modal-content">
   <div id="settingsMainView">
@@ -314,13 +328,14 @@ header{
  </div>
 </div>
 
-<!-- सबसे नीचे फिक्स नेविगेशन बार (सफेद पट्टी और बटन्स) -->
+<!-- सबसे नीचे फिक्स नेविगेशन बार (सफेद पट्टी जिसमें 📥 Download बटन भी है) -->
 <div class="bottom-bar">
- <button class="bottom-item" onclick="goBackBrowser()">‹</button>
- <button class="bottom-item" onclick="goForwardBrowser()">›</button>
- <button class="bottom-item" onclick="goHome()">⌂</button>
- <button class="bottom-item" onclick="openBookmarkModal()">⭐</button>
- <button class="bottom-item" onclick="openSettingsModal()">☰</button>
+ <button class="bottom-item" onclick="goBackBrowser()">‹<span>Back</span></button>
+ <button class="bottom-item" onclick="goForwardBrowser()">›<span>Forward</span></button>
+ <button class="bottom-item" onclick="goHome()">⌂<span>Home</span></button>
+ <button class="bottom-item" onclick="openDownloadModal()">📥<span>Downloads</span></button>
+ <button class="bottom-item" onclick="openBookmarkModal()">⭐<span>Bookmarks</span></button>
+ <button class="bottom-item" onclick="openSettingsModal()">☰<span>Menu</span></button>
 </div>
 
 <script>
@@ -336,6 +351,7 @@ function openTelegramApp(e){
 function closeAllModals(){
  document.getElementById("bookmarkModal").style.display="none";
  document.getElementById("historyModal").style.display="none";
+ document.getElementById("downloadModal").style.display="none";
  document.getElementById("settingsModal").style.display="none";
 }
 
@@ -432,8 +448,14 @@ function deleteBookmark(i){
 }
 
 function openBookmarkModal(){
+ closeAllModals();
  renderBookmarks();
  document.getElementById("bookmarkModal").style.display="flex";
+}
+
+function openDownloadModal(){
+ closeAllModals();
+ document.getElementById("downloadModal").style.display="flex";
 }
 
 function renderHistory(){
