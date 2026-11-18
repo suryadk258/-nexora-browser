@@ -252,7 +252,7 @@ header{
  </div>
 </div>
 
-<!-- सेटिंग्स मेनू (3-डॉट मेनू जिसमें Desktop Mode भी है) -->
+<!-- सेटिंग्स मेनू -->
 <div class="modal" id="settingsModal">
  <div class="modal-content">
   <div id="settingsMainView">
@@ -328,7 +328,7 @@ header{
  </div>
 </div>
 
-<!-- सबसे नीचे फिक्स नेविगेशन बार (सफेद पट्टी जिसमें 📥 Download बटन भी है) -->
+<!-- सबसे नीचे फिक्स नेविगेशन बार -->
 <div class="bottom-bar">
  <button class="bottom-item" onclick="goBackBrowser()">‹<span>Back</span></button>
  <button class="bottom-item" onclick="goForwardBrowser()">›<span>Forward</span></button>
@@ -345,7 +345,8 @@ let isDesktop=false;
 
 function openTelegramApp(e){
  if(e) e.preventDefault();
- window.location.href = "https://t.me/Jafarearningtrick";
+ // अब यह सीधा स्टैंडर्ड लिंक खोलेगा जो वेबव्यू में एरर नहीं देगा
+ window.open("https://t.me/Jafarearningtrick", "_blank");
 }
 
 function closeAllModals(){
@@ -395,10 +396,6 @@ function openWebsite(url){
  localStorage.setItem("nexHistory",JSON.stringify(h));
  
  window.location.href = url;
-}
-
-function openExternalLink(url){
- window.open(url, "_blank");
 }
 
 function changeLanguage(langCode) {
