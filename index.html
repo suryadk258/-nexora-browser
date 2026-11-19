@@ -9,225 +9,290 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
- background: linear-gradient(135deg, #7c3aed 0%, #ec4899 50%, #f43f5e 100%);
- background-attachment: fixed;
- color: #fff;
+ background: #ffffff;
+ color: #1f2937;
  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
  min-height: 100vh;
- padding-bottom: 75px;
-}
-header{
- position: relative;
- text-align: center;
- padding: 22px 15px;
- background: rgba(255, 255, 255, 0.15);
- backdrop-filter: blur(15px);
- border-bottom: 1px solid rgba(255, 255, 255, 0.3);
- box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+ display: flex;
+ flex-direction: column;
+ padding-bottom: 60px;
 }
 
-/* ऊपर दाईं तरफ लाल-पर्पल ग्रेडिएंट वाला Telegram आइकन बटन */
-.top-tg-btn {
- position: absolute;
- top: 50%;
- right: 16px;
- transform: translateY(-50%);
- width: 40px;
- height: 40px;
- background: linear-gradient(135deg, #7c3aed, #ec4899, #f43f5e);
+/* Via Browser jaisa Top Bar */
+header{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 14px 18px;
+ background: #ffffff;
+}
+.top-left{
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ color: #374151;
+ font-size: 16px;
+ font-weight: 500;
+ cursor: pointer;
+}
+.top-left svg{
+ width: 19px;
+ height: 19px;
+ stroke: #4b5563;
+}
+
+/* Main Center Area (Via Style) */
+.container{
+ flex: 1;
+ width: 100%;
+ max-width: 600px;
+ margin: 0 auto;
+ padding: 0 22px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ margin-top: -40px;
+}
+
+/* JEFROX Clean Logo */
+.logo {
+ font-size: 38px;
+ font-weight: 800;
+ letter-spacing: 3px;
+ margin-bottom: 26px;
+ user-select: none;
+}
+.l-j { color: #0ea5e9; }
+.l-e { color: #10b981; }
+.l-f { color: #f59e0b; }
+.l-r { color: #ef4444; }
+.l-o { color: #8b5cf6; }
+.l-x { color: #f97316; }
+
+/* Via Browser jaisa Pill Search Box */
+.search{
+ width: 100%;
+ display: flex;
+ align-items: center;
+ background: #ffffff;
+ border: 1.5px solid #e5e7eb;
+ border-radius: 999px;
+ padding: 6px 14px 6px 18px;
+ box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+ transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search:focus-within{
+ border-color: #9ca3af;
+ box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+.search input{
+ flex: 1;
+ min-width: 0;
+ background: transparent;
+ border: 0;
+ outline: 0;
+ color: #111827;
+ padding: 8px 4px;
+ font-size: 15px;
+}
+.search input::placeholder{
+ color: #9ca3af;
+}
+.search-btn{
+ background: transparent;
+ border: 0;
+ color: #4b5563;
+ width: 36px;
+ height: 36px;
  border-radius: 50%;
  display: flex;
  align-items: center;
  justify-content: center;
- box-shadow: 0 4px 15px rgba(236, 72, 153, 0.5);
- border: 1.5px solid rgba(255, 255, 255, 0.6);
- text-decoration: none;
- z-index: 100;
- transition: transform 0.15s, box-shadow 0.15s;
+ cursor: pointer;
 }
-.top-tg-btn:active {
- transform: translateY(-50%) scale(0.92);
- box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+.search-btn:active{
+ background: #f3f4f6;
 }
-.top-tg-btn svg {
- width: 21px;
- height: 21px;
- fill: #ffffff;
- filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+.search-btn svg{
+ width: 19px;
+ height: 19px;
+ stroke: #4b5563;
 }
 
-/* JEFROX का 3D अलग-अलग रंगों वाला लोगो */
-.logo {
- font-size: 42px;
- font-weight: 900;
- letter-spacing: 5px;
- display: inline-block;
- text-transform: uppercase;
+/* Shortcuts (Minimalist Via Style) */
+.grid{
+ width: 100%;
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 14px;
+ margin-top: 28px;
 }
-.l-j { color: #00f2fe; text-shadow: 0 4px 0 #0072ff, 0 8px 20px rgba(0,242,254,0.8); }
-.l-e { color: #00ff87; text-shadow: 0 4px 0 #10b981, 0 8px 20px rgba(0,255,135,0.8); }
-.l-f { color: #ffe600; text-shadow: 0 4px 0 #f59e0b, 0 8px 20px rgba(255,230,0,0.8); }
-.l-r { color: #ff2a6d; text-shadow: 0 4px 0 #be185d, 0 8px 20px rgba(255,42,109,0.8); }
-.l-o { color: #ffffff; text-shadow: 0 4px 0 #6d28d9, 0 0 20px #8b5cf6, 0 0 30px #c084fc; }
-.l-x { color: #ff5e00; text-shadow: 0 4px 0 #c2410c, 0 8px 20px rgba(255,94,0,0.8); }
-
-.container{max-width:850px;margin:auto;padding:18px 14px}
-.search{
- display:flex;align-items:center;gap:8px;
- background:#ffffff;border:none;
- border-radius:30px;padding:8px 16px;
- box-shadow:0 8px 30px rgba(0,0,0,0.25);
-}
-.search input{
- flex:1;min-width:0;background:transparent;
- border:0;outline:0;color:#1e293b;
- padding:8px 4px;font-size:15px;
-}
-.search button{
- background:linear-gradient(135deg, #ec4899, #f59e0b);
- border:0;color:#fff;
- padding:9px 16px;border-radius:22px;
- font-weight:bold;cursor:pointer;
-}
-
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
 .site{
- text-align:center;padding:15px 5px;
- background:rgba(255, 255, 255, 0.95);
- border-radius:14px;cursor:pointer;
- box-shadow:0 6px 20px rgba(0,0,0,0.18);
- transition:transform 0.15s;
+ text-align: center;
+ padding: 12px 4px;
+ background: #f9fafb;
+ border: 1px solid #f3f4f6;
+ border-radius: 14px;
+ cursor: pointer;
+ transition: background 0.15s, transform 0.1s;
 }
-.site:active{transform:scale(.95)}
-.site span{font-size:24px}
-.site p{font-size:12px;color:#1e293b;font-weight:600;margin-top:6px}
+.site:active{
+ background: #f3f4f6;
+ transform: scale(0.96);
+}
+.site span{font-size: 22px;}
+.site p{font-size: 12px; color: #374151; font-weight: 500; margin-top: 5px;}
 
 .ad-container{
- text-align:center;
- margin:18px 0;
- background:rgba(255, 255, 255, 0.95);
- border-radius:14px;
- padding:10px;
- min-height:55px;
- display:flex;
- justify-content:center;
- align-items:center;
- box-shadow:0 6px 20px rgba(0,0,0,0.18);
+ width: 100%;
+ text-align: center;
+ margin-top: 22px;
+ background: #f9fafb;
+ border-radius: 12px;
+ padding: 8px;
+ min-height: 50px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
 }
 
-/* पॉप-अप मॉडल्स */
+/* Pop-up Modals */
 .modal{
  display:none;position:fixed;top:0;left:0;width:100%;height:100%;
- background:rgba(15, 23, 42, 0.75);z-index:999999;
+ background:rgba(15, 23, 42, 0.5);z-index:999999;
  justify-content:flex-end;flex-direction:column;
 }
 .modal-content{
- background:#fff;border-top-left-radius:24px;border-top-right-radius:24px;
+ background:#fff;border-top-left-radius:20px;border-top-right-radius:20px;
  width:100%;max-height:85vh;overflow-y:auto;padding:20px;color:#1e293b;
- box-shadow:0 -4px 25px rgba(0,0,0,0.3);
+ box-shadow:0 -4px 25px rgba(0,0,0,0.15);
 }
 .modal-header{
  display:flex;align-items:center;
- border-bottom:1px solid #e2e8f0;padding-bottom:12px;margin-bottom:15px;
+ border-bottom:1px solid #f1f5f9;padding-bottom:12px;margin-bottom:12px;
 }
-.modal-header h2{font-size:18px;color:#1e293b;font-weight:700;display:flex;align-items:center;gap:10px;}
-.close-btn{background:transparent;border:0;color:#64748b;font-size:22px;cursor:pointer;margin-left:auto;}
+.modal-header h2{font-size:17px;color:#1e293b;font-weight:600;display:flex;align-items:center;gap:8px;}
+.close-btn{background:transparent;border:0;color:#64748b;font-size:20px;cursor:pointer;margin-left:auto;}
 
 .setting-row{
  display:flex;justify-content:space-between;align-items:center;
- padding:14px 4px;border-bottom:1px solid #f1f5f9;cursor:pointer;
+ padding:13px 4px;border-bottom:1px solid #f8fafc;cursor:pointer;
 }
-.setting-row div h4{font-size:15px;color:#1e293b;font-weight:600;margin-bottom:2px;}
+.setting-row div h4{font-size:14px;color:#1e293b;font-weight:600;margin-bottom:2px;}
 .setting-row div p{font-size:12px;color:#64748b;}
-.setting-row span{color:#db2777;font-size:18px;font-weight:bold;}
+.setting-row span{color:#4b5563;font-size:18px;}
 .sub-page{display:none;}
 
 .item{
- font-size:13px;color:#db2777;
+ font-size:13px;color:#2563eb;
  display:flex;justify-content:space-between;align-items:center;
- margin-top:10px;background:#f8fafc;padding:12px;border-radius:10px;
+ margin-top:10px;background:#f8fafc;padding:11px;border-radius:10px;
  border:1px solid #e2e8f0;word-break:break-all;
 }
-.item button{background:#ef4444;color:#fff;border:0;padding:5px 10px;border-radius:6px;cursor:pointer;}
+.item button{background:#ef4444;color:#fff;border:0;padding:4px 9px;border-radius:6px;cursor:pointer;}
 
-/* सबसे नीचे फिक्स एक्शन बार (सफेद पट्टी और 6 बटन्स) */
+/* Via Browser jaisa Minimalist Bottom Navigation Bar */
 .bottom-bar{
- position:fixed !important;
- bottom:0 !important;
- left:0 !important;
- width:100% !important;
- height: 65px;
+ position: fixed !important;
+ bottom: 0 !important;
+ left: 0 !important;
+ width: 100% !important;
+ height: 54px;
  background: #ffffff !important;
- border-top: 1px solid #cbd5e1;
- display:flex !important;
- justify-content:space-around;
- align-items:center;
- padding:4px;
- z-index:999998 !important;
- box-shadow: 0 -2px 15px rgba(0,0,0,0.2);
+ border-top: 1px solid #f3f4f6;
+ display: flex !important;
+ justify-content: space-around;
+ align-items: center;
+ z-index: 999998 !important;
 }
 .bottom-item{
- background:transparent;border:0;color:#334155 !important;
- font-size:22px;font-weight:bold;text-align:center;cursor:pointer;
- display:flex;flex-direction:column;align-items:center;justify-content:center;
- flex:1;
- height:100%;
+ background: transparent;
+ border: 0;
+ color: #374151 !important;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex: 1;
+ height: 100%;
 }
-.bottom-item span{font-size:10px;margin-top:2px;font-weight:600;}
-.bottom-item:active{color:#db2777 !important;}
+.bottom-item svg{
+ width: 21px;
+ height: 21px;
+ stroke: #374151;
+ fill: none;
+ stroke-width: 1.8;
+ stroke-linecap: round;
+ stroke-linejoin: round;
+}
+.bottom-item:active svg{
+ stroke: #0ea5e9;
+}
 </style>
 </head>
 
 <body>
 
+<!-- Via Style Top Bar (Without Telegram Icon) -->
 <header>
- <div class="logo">
-  <span class="l-j">J</span><span class="l-e">E</span><span class="l-f">F</span><span class="l-r">R</span><span class="l-o">O</span><span class="l-x">X</span>
- </div>
- <!-- ऊपर दाईं तरफ लाल-पर्पल ग्रेडिएंट वाला Telegram आइकन -->
- <a href="https://t.me/Jafarearningtrick" onclick="openTelegramApp(event)" class="top-tg-btn" aria-label="Telegram">
-  <svg viewBox="0 0 24 24">
-   <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+ <div class="top-left" onclick="document.getElementById('address').focus()">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+   <circle cx="11" cy="11" r="8"></circle>
+   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
   </svg>
- </a>
+  <span>Homepage</span>
+ </div>
 </header>
 
 <main class="container">
+ <!-- Center Logo -->
+ <div class="logo">
+  <span class="l-j">J</span><span class="l-e">E</span><span class="l-f">F</span><span class="l-r">R</span><span class="l-o">O</span><span class="l-x">X</span>
+ </div>
+
+ <!-- Search Bar & Search Icon Button -->
  <div class="search">
-  <span>🔍</span>
-  <input id="address" placeholder="Search or enter website..." onkeydown="if(event.key==='Enter')searchWeb()">
-  <button onclick="searchWeb()">GO</button>
+  <input id="address" type="search" enterkeyhint="search" placeholder="Search or type URL" onkeydown="if(event.key==='Enter')searchWeb()">
+  <button class="search-btn" onclick="searchWeb()" aria-label="Search">
+   <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+   </svg>
+  </button>
  </div>
 
- <div class="ad-container">
-  <script type="text/javascript">
-    document.write('<scr' + 'ipt type="text/javascript" src="https://statict.startappservice.com/js/smaandro.js?appId=210611342"></scr' + 'ipt>');
-  </script>
- </div>
-
+ <!-- Quick Sites -->
  <div class="grid">
-  <div class="site" onclick="openWebsite('https://duckduckgo.com')"><span>🦆</span><p>DuckDuckGo</p></div>
+  <div class="site" onclick="openWebsite('https://www.google.com')"><span>🌐</span><p>Google</p></div>
   <div class="site" onclick="openWebsite('https://www.wikipedia.org')"><span>📚</span><p>Wikipedia</p></div>
   <div class="site" onclick="openWebsite('https://www.youtube.com')"><span>▶️</span><p>YouTube</p></div>
   <div class="site" onclick="openWebsite('https://www.mozilla.org')"><span>🦊</span><p>Mozilla</p></div>
   <div class="site" onclick="openWebsite('https://www.bing.com')"><span>🔎</span><p>Bing</p></div>
   <div class="site" onclick="openWebsite('https://www.openstreetmap.org')"><span>🗺️</span><p>Maps</p></div>
  </div>
+
+ <!-- Ad Container -->
+ <div class="ad-container">
+  <script type="text/javascript">
+    document.write('<scr' + 'ipt type="text/javascript" src="https://statict.startappservice.com/js/smaandro.js?appId=210611342"></scr' + 'ipt>');
+  </script>
+ </div>
 </main>
 
-<!-- बुकमार्क पॉप-अप -->
+<!-- Bookmarks Modal -->
 <div class="modal" id="bookmarkModal">
  <div class="modal-content">
   <div class="modal-header">
    <h2>Bookmarks</h2>
    <button class="close-btn" onclick="closeAllModals()">✕</button>
   </div>
-  <button onclick="saveBookmark()" style="background:linear-gradient(135deg,#db2777,#f59e0b);color:#fff;border:0;padding:11px;border-radius:10px;margin-bottom:15px;font-weight:bold;cursor:pointer;width:100%;">+ Save Current Page</button>
+  <button onclick="saveBookmark()" style="background:#111827;color:#fff;border:0;padding:11px;border-radius:10px;margin-bottom:12px;font-weight:600;cursor:pointer;width:100%;">+ Save Current Page</button>
   <div id="bookmarksList"></div>
  </div>
 </div>
 
-<!-- डाउनलोड मैनेजर पॉप-अप -->
+<!-- Downloads Modal -->
 <div class="modal" id="downloadModal">
  <div class="modal-content">
   <div class="modal-header">
@@ -240,7 +305,7 @@ header{
  </div>
 </div>
 
-<!-- हिस्ट्री पॉप-अप -->
+<!-- History Modal -->
 <div class="modal" id="historyModal">
  <div class="modal-content">
   <div class="modal-header">
@@ -248,36 +313,36 @@ header{
    <button class="close-btn" onclick="closeAllModals()">✕</button>
   </div>
   <div id="historyList"></div>
-  <button onclick="clearHistory()" style="background:#ef4444;color:#fff;border:0;padding:11px;border-radius:10px;margin-top:15px;font-weight:bold;cursor:pointer;width:100%;">Clear History</button>
+  <button onclick="clearHistory()" style="background:#ef4444;color:#fff;border:0;padding:11px;border-radius:10px;margin-top:15px;font-weight:600;cursor:pointer;width:100%;">Clear History</button>
  </div>
 </div>
 
-<!-- सेटिंग्स मेनू -->
+<!-- Settings Menu Modal -->
 <div class="modal" id="settingsModal">
  <div class="modal-content">
   <div id="settingsMainView">
    <div class="modal-header">
-    <h2>Settings & Menu</h2>
+    <h2>Menu & Settings</h2>
     <button class="close-btn" onclick="closeAllModals()">✕</button>
    </div>
    <div class="setting-row" onclick="toggleDesktopMode()">
     <div><h4 id="desktopText">Desktop Mode: OFF</h4><p>Switch between Mobile & Desktop view</p></div>
     <span id="desktopStatus">💻</span>
    </div>
-   <div class="setting-row" onclick="openSubPage('generalPage')">
-    <div><h4>Language & Region (भाषा)</h4><p>English & All Indian Languages</p></div>
-    <span>›</span>
-   </div>
-   <div class="setting-row" onclick="openSubPage('privacyPage')">
-    <div><h4>Privacy Policy</h4><p>Data protection & Policy</p></div>
-    <span>›</span>
-   </div>
-   <div class="setting-row" onclick="openTelegramApp(event)">
-    <div><h4>Telegram Official</h4><p>Join @Jafarearningtrick</p></div>
+   <div class="setting-row" onclick="openDownloadModal()">
+    <div><h4>Downloads</h4><p>View downloaded files</p></div>
     <span>›</span>
    </div>
    <div class="setting-row" onclick="openHistoryModal()">
     <div><h4>Browsing History</h4><p>View saved history</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="openSubPage('generalPage')">
+    <div><h4>Search Engine & Language</h4><p>Google, Bing, DuckDuckGo & Languages</p></div>
+    <span>›</span>
+   </div>
+   <div class="setting-row" onclick="openSubPage('privacyPage')">
+    <div><h4>Privacy Policy</h4><p>Data protection & Policy</p></div>
     <span>›</span>
    </div>
   </div>
@@ -285,15 +350,15 @@ header{
   <!-- Language & Region -->
   <div id="generalPage" class="sub-page">
    <div class="modal-header">
-    <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Language & Region</h2>
+    <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;font-size:22px;">‹</span> Search & Language</h2>
     <button class="close-btn" onclick="closeAllModals()">✕</button>
    </div>
    <div class="setting-row">
-    <div><h4>Search Engine</h4><p>DuckDuckGo / Google / Bing</p></div>
+    <div><h4>Search Engine</h4><p>Google / Bing / DuckDuckGo</p></div>
     <select id="searchEngine" onchange="updateSearchEngine(this.value)" style="padding:6px;border-radius:6px;border:1px solid #cbd5e1;">
-     <option value="duckduckgo">DuckDuckGo</option>
      <option value="google">Google</option>
      <option value="bing">Bing</option>
+     <option value="duckduckgo">DuckDuckGo</option>
     </select>
    </div>
    <div class="setting-row">
@@ -316,7 +381,7 @@ header{
   <!-- Privacy Policy -->
   <div id="privacyPage" class="sub-page">
    <div class="modal-header">
-    <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;color:#db2777;font-size:24px;">‹</span> Privacy Policy</h2>
+    <h2><span onclick="backToSettingsMain()" style="cursor:pointer;margin-right:8px;font-weight:bold;font-size:22px;">‹</span> Privacy Policy</h2>
     <button class="close-btn" onclick="closeAllModals()">✕</button>
    </div>
    <div style="font-size:13px;color:#475569;line-height:1.6;padding:8px 0;">
@@ -328,26 +393,29 @@ header{
  </div>
 </div>
 
-<!-- सबसे नीचे फिक्स नेविगेशन बार -->
+<!-- Via Style Minimalist Bottom Bar -->
 <div class="bottom-bar">
- <button class="bottom-item" onclick="goBackBrowser()">‹<span>Back</span></button>
- <button class="bottom-item" onclick="goForwardBrowser()">›<span>Forward</span></button>
- <button class="bottom-item" onclick="goHome()">⌂<span>Home</span></button>
- <button class="bottom-item" onclick="openDownloadModal()">📥<span>Downloads</span></button>
- <button class="bottom-item" onclick="openBookmarkModal()">⭐<span>Bookmarks</span></button>
- <button class="bottom-item" onclick="openSettingsModal()">☰<span>Menu</span></button>
+ <button class="bottom-item" onclick="goBackBrowser()" aria-label="Back">
+  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+ </button>
+ <button class="bottom-item" onclick="goForwardBrowser()" aria-label="Forward">
+  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+ </button>
+ <button class="bottom-item" onclick="goHome()" aria-label="Home">
+  <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+ </button>
+ <button class="bottom-item" onclick="openBookmarkModal()" aria-label="Bookmarks">
+  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+ </button>
+ <button class="bottom-item" onclick="openSettingsModal()" aria-label="Menu">
+  <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+ </button>
 </div>
 
 <script>
 let currentURL="";
-let currentEngine="duckduckgo";
+let currentEngine="google";
 let isDesktop=false;
-
-function openTelegramApp(e){
- if(e) e.preventDefault();
- // अब यह सीधा स्टैंडर्ड लिंक खोलेगा जो वेबव्यू में एरर नहीं देगा
- window.open("https://t.me/Jafarearningtrick", "_blank");
-}
 
 function closeAllModals(){
  document.getElementById("bookmarkModal").style.display="none";
@@ -380,9 +448,9 @@ function searchWeb(){
  if(/^https?:\/\//i.test(q)){ url=q; }
  else if(q.includes(".")&&!q.includes(" ")){ url="https://"+q; }
  else{
-  if(currentEngine==="google"){ url="https://www.google.com/search?q="+encodeURIComponent(q); }
-  else if(currentEngine==="bing"){ url="https://www.bing.com/search?q="+encodeURIComponent(q); }
-  else{ url="https://duckduckgo.com/?q="+encodeURIComponent(q); }
+  if(currentEngine==="bing"){ url="https://www.bing.com/search?q="+encodeURIComponent(q); }
+  else if(currentEngine==="duckduckgo"){ url="https://duckduckgo.com/?q="+encodeURIComponent(q); }
+  else{ url="https://www.google.com/search?q="+encodeURIComponent(q); }
  }
  openWebsite(url);
 }
@@ -394,7 +462,6 @@ function openWebsite(url){
  h.unshift(url);
  h=[...new Set(h)].slice(0,20);
  localStorage.setItem("nexHistory",JSON.stringify(h));
- 
  window.location.href = url;
 }
 
@@ -432,7 +499,7 @@ function renderBookmarks(){
  let b=JSON.parse(localStorage.getItem("nexBookmarks")||"[]");
  document.getElementById("bookmarksList").innerHTML=
  b.map((url,i)=>`<div class="item">
- <a href="${url}" style="color:#db2777;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
+ <a href="${url}" style="color:#2563eb;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
  <button onclick="deleteBookmark(${i})">✕</button>
  </div>`).join("")||"<p style='color:#64748b;font-size:13px;text-align:center;padding:15px;'>No bookmarks yet.</p>";
 }
@@ -459,7 +526,7 @@ function renderHistory(){
  let h=JSON.parse(localStorage.getItem("nexHistory")||"[]");
  document.getElementById("historyList").innerHTML=
  h.map((url)=>`<div class="item">
- <a href="${url}" style="color:#db2777;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
+ <a href="${url}" style="color:#2563eb;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;">${url}</a>
  </div>`).join("")||"<p style='color:#64748b;font-size:13px;text-align:center;padding:15px;'>No history yet.</p>";
 }
 
